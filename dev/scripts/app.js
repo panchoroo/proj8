@@ -14,7 +14,7 @@ var config = {
 firebase.initializeApp(config);
 
 const provider = new firebase.auth.GoogleAuthProvider();
-// can also use twitter or whatever
+// add twitter also?
 
 class App extends React.Component {
   constructor() {
@@ -41,7 +41,6 @@ class App extends React.Component {
 
   login(e) {
     e.preventDefault();
-    // can also do sign in on another page or something
     firebase.auth().signInWithPopup(provider)
       .then((user) => {
         console.log(user);
@@ -62,12 +61,14 @@ class App extends React.Component {
       });
   }
 
-
   render() {
     return (
       <div>
         <h1>Workout App</h1>
-
+        <a href="" onClick={this.login}>Login</a>
+        <a href="" onClick={this.logout}>Logout</a>
+        <p>User logged {this.state.loggedIn ? 'in' : 'out'}</p>
+        {/* <p>User logged in</p> */}
       </div>
     )
   }
