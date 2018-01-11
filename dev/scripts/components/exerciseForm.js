@@ -5,7 +5,6 @@ class ExerciseForm extends React.Component {
     constructor() {
         super();
         this.state = {
-            currentDate: '',
             currentItem: 'squats',
             currentDescription: 'pistol squats',
             currentReps: '3',
@@ -26,7 +25,6 @@ class ExerciseForm extends React.Component {
         this.props.submitForm(this.state);
         // reset the state after submitting 
         this.setState({
-            currentDate: '',
             currentDescription: '',
         })
     }
@@ -34,26 +32,6 @@ class ExerciseForm extends React.Component {
     render() {
         return (
             <form action="" onSubmit={this.handleSubmit}>
-                <div className="textInputs">
-                    <label htmlFor="currentDate" className="hidden">enter date</label>
-                    <input
-                        id="currentDate"
-                        placeholder="enter date"
-                        type="text"
-                        value={this.state.currentDate}
-                        onChange={this.handleChange}
-                        required="required"
-                    />
-                    <label htmlFor="currentDescription" className="hidden">optional description</label>
-                    <input
-                        id="currentDescription"
-                        placeholder="description (optional)"
-                        type="text"
-                        value={this.state.currentDescription}
-                        onChange={this.handleChange}
-                    />
-                </div>
-
                 <div className="radio">
                     <div className="radioInput">
                         <label htmlFor="squats">Squats</label>
@@ -102,6 +80,7 @@ class ExerciseForm extends React.Component {
                 </div>
                 
                 <div className="radio">
+                    <label>First set</label>
                     <div className="radioInput">
                         <label htmlFor="3">3</label>
                         <input
@@ -130,6 +109,36 @@ class ExerciseForm extends React.Component {
                             id="currentReps"
                             name="reps"
                             value="5"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="radioInput">
+                        <label htmlFor="6">6</label>
+                        <input
+                            type="radio"
+                            id="currentReps"
+                            name="reps"
+                            value="6"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="radioInput">
+                        <label htmlFor="7">7</label>
+                        <input
+                            type="radio"
+                            id="currentReps"
+                            name="reps"
+                            value="7"
+                            onChange={this.handleChange}
+                        />
+                    </div>
+                    <div className="radioInput">
+                        <label htmlFor="8">8</label>
+                        <input
+                            type="radio"
+                            id="currentReps"
+                            name="reps"
+                            value="8"
                             onChange={this.handleChange}
                         />
                     </div>

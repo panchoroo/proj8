@@ -1,0 +1,15 @@
+/* Global styles */
+
+$darkColor: black;
+$lightColor: white;
+
+
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.flexColumn {
+    display: flex;
+    flex-direction: column;
+}
