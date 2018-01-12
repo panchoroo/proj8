@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import firebase from 'firebase';
 
 import ExerciseForm from './components/exerciseForm';
+import WorkoutItem from './components/workoutItem';
 
 // Initialize Firebase
 var config = {
@@ -38,11 +39,14 @@ class App extends React.Component {
         workoutApp.on('value', (snapshot) => {
           const workout = [];
           let workoutInfo = snapshot.val();
-          for (let exercise in workoutInfo) {
-            console.log('exercise', exercise);
-            // let ex = foods[food];
-            // newFood.id = food;
-            // workout.push(newFood);
+          for (let date in workoutInfo) {
+            console.log('date', date);
+            const workoutsOnDate = workoutInfo[date];
+            for (let ex in workoutsOnDate) {
+              console.log('ex', workoutsOnDate[ex]);
+              let exercise = workoutsOnDate[ex];
+              workout.push(exercise);
+            }
           }
           this.setState({
             user,
@@ -58,24 +62,7 @@ class App extends React.Component {
     e.preventDefault();
     firebase.auth().signInWithPopup(provider)
       .then((user) => {
-        const workoutApp = firebase.database().ref(`/users/${user.uid}`)
-
         const workout = [];
-        workoutApp.on('value', (snapshot) => {
-          const workout = [];
-          let workoutInfo = snapshot.val();
-          for (let workouts in workoutInfo) {
-            console.log('workouts', workouts);
-            for (let w in workouts){
-              workout.push(w);
-            }
-          }
-        });
-        this.setState({
-          user,
-          loggedIn: true,
-          workout
-        })
         console.log('workout', this.state.workout)
       });
   }
@@ -93,10 +80,9 @@ class App extends React.Component {
   }
 
   addItem(item) {
-    // console.log('user add item', this.state.user)
     const newDate = new Date();
     let dateString = '';
-    // Get the month, day, and year.  
+    // Get the month, day, and year  
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
@@ -114,16 +100,27 @@ class App extends React.Component {
           <div className="flex">
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!`}</h3>: ''}
 
-            {this.state.loggedIn ? <a href="" onClick={this.logout}>Log out</a> : <a href="" onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}>Log out</a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
           
         </header>
 
         <ExerciseForm submitForm={this.addItem} />
 
+        <section className='workouts'>
+          <ul className='workoutsByDate'>
+            {console.log('workout before', this.state.workout)}
+            {this.state.workout.map((eachDate) => {
+              return <WorkoutItem item={eachDate} date={eachDate} key={eachDate} />
+              // delete= { this.deleteItem } edit={this.editItem}
+            })}
+          </ul>
+        </section>
+
       </div>
     )
   }
+  
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));

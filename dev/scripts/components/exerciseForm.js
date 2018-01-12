@@ -21,7 +21,7 @@ class ExerciseForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        console.log('submit')
+        // console.log('submit')
         this.props.submitForm(this.state);
         // reset the state after submitting 
         this.setState({
@@ -77,6 +77,18 @@ class ExerciseForm extends React.Component {
                             onChange={this.handleChange}
                         />
                     </div>
+                </div>
+
+                <div className="textInputs">
+                    <label htmlFor="currentDescription" className="hidden">enter a description</label>
+                    <input
+                        id="currentDescription"
+                        placeholder="enter a description"
+                        type="text"
+                        value={this.state.currentDescription}
+                        onChange={this.handleChange}
+                        required="required"
+                    />
                 </div>
                 
                 <div className="radio">
