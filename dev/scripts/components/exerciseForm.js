@@ -92,7 +92,7 @@ class ExerciseForm extends React.Component {
                 </div>
                 
                 <div className="radio">
-                    <label>First set</label>
+                    <label>Number of Reps</label>
                     <div className="radioInput">
                         <label htmlFor="3">3</label>
                         <input

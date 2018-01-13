@@ -24,7 +24,8 @@ class App extends React.Component {
     this.state = {
       user: null,
       loggedIn: false,
-      workout: []
+      allWorkouts: [],
+      allDates:[]
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -37,21 +38,28 @@ class App extends React.Component {
         const workoutApp = firebase.database().ref(`/users/${user.uid}`);
 
         workoutApp.on('value', (snapshot) => {
-          const workout = [];
+          const allWorkouts = [];
+          const allDates = [];
+
           let workoutInfo = snapshot.val();
           for (let date in workoutInfo) {
-            console.log('date', date);
-            const workoutsOnDate = workoutInfo[date];
-            for (let ex in workoutsOnDate) {
-              console.log('ex', workoutsOnDate[ex]);
-              let exercise = workoutsOnDate[ex];
-              workout.push(exercise);
+            // console.log('date', date);
+            const workoutsOnDate = [];
+            const workouts = workoutInfo[date];
+            allDates.push(date);
+            for (let ex in workouts) {
+              // console.log('ex', workouts[ex]);
+              let exercise = workouts[ex];
+              // allWorkouts.push(exercise);
+              workoutsOnDate.push(exercise);
             }
+            allWorkouts.push(workoutsOnDate);
           }
           this.setState({
             user,
             loggedIn: true,
-            workout
+            allWorkouts,
+            allDates
           })
         });
       }
@@ -62,8 +70,7 @@ class App extends React.Component {
     e.preventDefault();
     firebase.auth().signInWithPopup(provider)
       .then((user) => {
-        const workout = [];
-        console.log('workout', this.state.workout)
+        // console.log('all workouts', this.state.allWorkouts);
       });
   }
 
@@ -74,7 +81,8 @@ class App extends React.Component {
         this.setState({
           user: null,
           loggedIn: false,
-          workout: []
+          allWorkouts: [],
+          allDates: []
         })
       });
   }
@@ -86,7 +94,7 @@ class App extends React.Component {
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
-    console.log(dateString);
+    // console.log(dateString);
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${dateString}`);
     workoutApp.push(item);
   }
@@ -109,9 +117,13 @@ class App extends React.Component {
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
-            {console.log('workout before', this.state.workout)}
-            {this.state.workout.map((eachDate) => {
-              return <WorkoutItem item={eachDate} date={eachDate} key={eachDate} />
+            {/* {console.log('workout before', this.state.allWorkouts)} */}
+            {/* {for (let date in {this.state.allWorkouts}){
+                // <WorkoutItem item={this.state.allWorkouts} date={date} key={date} />
+              {console.log('date', date);}
+            }} */}
+            {this.state.allDates.map((eachDate, index) => {
+              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index}/>
               // delete= { this.deleteItem } edit={this.editItem}
             })}
           </ul>
