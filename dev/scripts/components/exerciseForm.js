@@ -49,7 +49,7 @@ class ExerciseForm extends React.Component {
                                 <input
                                     id="currentItem"
                                     type="radio"
-                                    value="lsit"
+                                    value="l-sit"
                                     name="exercise"
                                     onChange={this.handleChange}
                                 />
@@ -170,7 +170,7 @@ class ExerciseForm extends React.Component {
                         
                     </div>
                 </section>
-                <button type="submit">Add exercise</button>
+                <button type="submit">Submit</button>
             </form>
         )
     }

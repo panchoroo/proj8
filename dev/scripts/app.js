@@ -26,11 +26,15 @@ class App extends React.Component {
       user: null,
       loggedIn: false,
       allWorkouts: [],
-      allDates:[]
+      allDates:[],
+      toggleAdd: false,
+      toggleDate: false
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.toggleAddFunction = this.toggleAddFunction.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   componentDidMount() {
@@ -44,18 +48,20 @@ class App extends React.Component {
 
           let workoutInfo = snapshot.val();
           for (let date in workoutInfo) {
-            // console.log('date', date);
             const workoutsOnDate = [];
             const workouts = workoutInfo[date];
             allDates.push(date);
             for (let ex in workouts) {
-              // console.log('ex', workouts[ex]);
+              // console.log('ex', ex);
               let exercise = workouts[ex];
-              // allWorkouts.push(exercise);
+              exercise['key'] = ex;
               workoutsOnDate.push(exercise);
             }
             allWorkouts.push(workoutsOnDate);
           }
+          allWorkouts.reverse();
+          allDates.reverse();
+
           this.setState({
             user,
             loggedIn: true,
@@ -95,10 +101,25 @@ class App extends React.Component {
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
-    // console.log(dateString);
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${dateString}`);
     workoutApp.push(item);
   }
+
+  toggleAddFunction(e) {
+    e.preventDefault();
+    let toggleAdd = true;
+    if (this.state.toggleAdd) {
+      toggleAdd = false;
+    }
+    this.setState({
+      toggleAdd
+    })
+  }
+
+  deleteItem(date, index) {
+    firebase.database().ref(`/users/${this.state.user.uid}/${date}/${index}`).remove();
+  }
+  
 
   render() {
     return (
@@ -114,18 +135,14 @@ class App extends React.Component {
           
         </header>
 
-        <ExerciseForm submitForm={this.addItem} />
+        <button onClick={this.toggleAddFunction}>Add Exercise</button>
+        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} /> : ''}
+        
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
-            {/* {console.log('workout before', this.state.allWorkouts)} */}
-            {/* {for (let date in {this.state.allWorkouts}){
-                // <WorkoutItem item={this.state.allWorkouts} date={date} key={date} />
-              {console.log('date', date);}
-            }} */}
             {this.state.allDates.map((eachDate, index) => {
-              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index}/>
-              // delete= { this.deleteItem } edit={this.editItem}
+              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index} delete= {this.deleteItem}/>
             })}
           </ul>
         </section>
