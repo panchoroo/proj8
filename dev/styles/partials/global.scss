@@ -18,10 +18,16 @@ $lightColor: white;
     margin-bottom: 20px;
     max-width: 90%;
     list-style-type: none;
+    flex-wrap: wrap;
 }
 
-.workouts{
-    // background: yellow;
+.workout li{
+    margin: 40px 10px;
+    width: 20%;
+}
+
+.workouts h2{
+    background: yellow;
 }
 
 .modal {
@@ -42,4 +48,8 @@ form {
 
 .exerciseForm {
     justify-content: space-around;
+}
+
+.exerciseItem {
+    background: lightseagreen;
 }
