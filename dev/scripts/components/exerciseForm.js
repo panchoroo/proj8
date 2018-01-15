@@ -21,9 +21,7 @@ class ExerciseForm extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // console.log('submit')
         this.props.submitForm(this.state);
-        // reset the state after submitting 
         this.setState({
             currentDescription: '',
         })
@@ -31,132 +29,147 @@ class ExerciseForm extends React.Component {
 
     render() {
         return (
-            <form action="" onSubmit={this.handleSubmit}>
-                <div className="radio">
-                    <div className="radioInput">
-                        <label htmlFor="squats">Squats</label>
-                        <input
-                            id="currentItem"
-                            type="radio"
-                            value="squats"
-                            name="exercise"
-                            onChange={this.handleChange}
-                            defaultChecked
-                        />
-                    </div>
+            <form action="" className={`modal flexColumn`} onSubmit={this.handleSubmit}>
+                <section className={`exerciseForm flex`}>
+                    <div className="exercise">
+                        <div className="radio">
+                            <div className="radioInput">
+                                <input
+                                    id="currentItem"
+                                    type="radio"
+                                    value="squats"
+                                    name="exercise"
+                                    onChange={this.handleChange}
+                                    defaultChecked
+                                />
+                                <label htmlFor="squats">Squats</label>
+                            </div>
 
-                    <div className="radioInput">
-                        <label htmlFor="lsit">L sit</label>
-                        <input
-                            id="currentItem"
-                            type="radio"
-                            value="lsit"
-                            name="exercise"
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                            <div className="radioInput">
+                                <input
+                                    id="currentItem"
+                                    type="radio"
+                                    value="lsit"
+                                    name="exercise"
+                                    onChange={this.handleChange}
+                                />
+                                <label htmlFor="lsit">L sit</label>
+                            </div>
 
-                    <div className="radioInput">
-                        <label htmlFor="pushups">Push ups</label>
-                        <input
-                            id="currentItem"
-                            type="radio"
-                            value="pushups"
-                            name="exercise"
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                            <div className="radioInput">
+                                <input
+                                    id="currentItem"
+                                    type="radio"
+                                    value="pushups"
+                                    name="exercise"
+                                    onChange={this.handleChange}
+                                />
+                                <label htmlFor="pushups">Push ups</label>
+                            </div>
 
-                    <div className="radioInput">
-                        <label htmlFor="rows">Rows</label>
-                        <input
-                            id="currentItem"
-                            type="radio"
-                            value="rows"
-                            name="exercise"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                </div>
+                            <div className="radioInput">
+                                <input
+                                    id="currentItem"
+                                    type="radio"
+                                    value="rows"
+                                    name="exercise"
+                                    onChange={this.handleChange}
+                                />
+                                <label htmlFor="rows">Rows</label>
+                            </div>
 
-                <div className="textInputs">
-                    <label htmlFor="currentDescription" className="hidden">enter a description</label>
-                    <input
-                        id="currentDescription"
-                        placeholder="enter a description"
-                        type="text"
-                        value={this.state.currentDescription}
-                        onChange={this.handleChange}
-                        required="required"
-                    />
-                </div>
-                
-                <div className="radio">
-                    <label>Number of Reps</label>
-                    <div className="radioInput">
-                        <label htmlFor="3">3</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="3"
-                            onChange={this.handleChange}
-                            defaultChecked
-                        />
+                            <div className="radioInput">
+                                <input
+                                    id="currentItem"
+                                    type="radio"
+                                    value="other"
+                                    name="exercise"
+                                    onChange={this.handleChange}
+                                />
+                                <label htmlFor="other">Other</label>
+                            </div>
+                        </div>
+
+                        <div className="textInputs">
+                            <label htmlFor="currentDescription" className="hidden">enter a description</label>
+                            <input
+                                id="currentDescription"
+                                placeholder="enter a description"
+                                type="text"
+                                value={this.state.currentDescription}
+                                onChange={this.handleChange}
+                                required="required"
+                            />
+                        </div>
                     </div>
-                    <div className="radioInput">
-                        <label htmlFor="4">4</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="4"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="radioInput">
-                        <label htmlFor="5">5</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="5"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="radioInput">
-                        <label htmlFor="6">6</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="6"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="radioInput">
-                        <label htmlFor="7">7</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="7"
-                            onChange={this.handleChange}
-                        />
-                    </div>
-                    <div className="radioInput">
-                        <label htmlFor="8">8</label>
-                        <input
-                            type="radio"
-                            id="currentReps"
-                            name="reps"
-                            value="8"
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    {/* end exercise and description */}
                     
-                </div>
-
+                    <div className="radio">
+                        <label>Number of Reps</label>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="3"
+                                onChange={this.handleChange}
+                                defaultChecked
+                            />
+                            <label htmlFor="3">3</label>
+                        </div>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="4"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="4">4</label>
+                        </div>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="5"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="5">5</label>
+                        </div>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="6"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="6">6</label>
+                        </div>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="7"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="7">7</label>
+                        </div>
+                        <div className="radioInput">
+                            <input
+                                type="radio"
+                                id="currentReps"
+                                name="reps"
+                                value="8"
+                                onChange={this.handleChange}
+                            />
+                            <label htmlFor="8">8</label>
+                        </div>
+                        
+                    </div>
+                </section>
                 <button type="submit">Add exercise</button>
             </form>
         )

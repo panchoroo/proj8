@@ -23,3 +23,23 @@ $lightColor: white;
 .workouts{
     // background: yellow;
 }
+
+.modal {
+    background: rgba(3, 3, 3, 0.253);
+}
+.radio input{
+    margin-right: 15px;
+}
+
+.radioInput {
+    width: 100%;
+    display: flex;
+}
+
+form {
+    justify-content: center;
+}
+
+.exerciseForm {
+    justify-content: space-around;
+}
