@@ -4,6 +4,7 @@ import firebase from 'firebase';
 
 import ExerciseForm from './components/exerciseForm';
 import WorkoutItem from './components/workoutItem';
+import ExerciseItem from './components/exerciseItem';
 
 // Initialize Firebase
 var config = {
