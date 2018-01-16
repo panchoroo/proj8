@@ -28,16 +28,20 @@ class App extends React.Component {
       allWorkouts: [],
       allDates:[],
       toggleAdd: false,
-      toggleDate: false
+      toggleDate: false,
+      dateString: null
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
     this.addItem = this.addItem.bind(this);
     this.toggleAddFunction = this.toggleAddFunction.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+    this.getDate = this.getDate.bind(this);
   }
 
   componentDidMount() {
+    this.getDate();
+    console.log('date set', this.state.dateString)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const workoutApp = firebase.database().ref(`/users/${user.uid}`);
@@ -52,7 +56,6 @@ class App extends React.Component {
             const workouts = workoutInfo[date];
             allDates.push(date);
             for (let ex in workouts) {
-              // console.log('ex', ex);
               let exercise = workouts[ex];
               exercise['key'] = ex;
               workoutsOnDate.push(exercise);
@@ -61,7 +64,8 @@ class App extends React.Component {
           }
           allWorkouts.reverse();
           allDates.reverse();
-
+          console.log('date set', this.state.dateString)
+          
           this.setState({
             user,
             loggedIn: true,
@@ -94,15 +98,33 @@ class App extends React.Component {
       });
   }
 
-  addItem(item) {
+  getDate() {
     const newDate = new Date();
     let dateString = '';
     // Get the month, day, and year  
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
-    const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${dateString}`);
-    workoutApp.push(item);
+    console.log('dateString',dateString);
+    this.setState({
+      dateString
+    })
+  }
+
+  addItem(item) {
+    let date = this.state.dateString;
+    const newItem = {
+      currentItem: item.currentItem,
+      currentDescription: item.currentDescription,
+      currentReps: item.currentReps
+    }
+    console.log('date additem', date)
+    console.log('item additem', item.currentItem)
+    console.log(`/users/${this.state.user.uid}/${date}/`)
+    // const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
+    const workoutApp = firebase.database().ref(`/users/TgYMXxNaP5UNT1HqtZCXgAKACLn1/1-16-2018`);
+    
+    workoutApp.push(newItem);
   }
 
   toggleAddFunction(e) {
@@ -136,8 +158,7 @@ class App extends React.Component {
         </header>
 
         <button onClick={this.toggleAddFunction}>Add Exercise</button>
-        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} /> : ''}
-        
+        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} allWorkouts={this.state.allWorkouts}/> : ''} 
 
         <section className='workouts'>
           <ul className='workoutsByDate'>

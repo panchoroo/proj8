@@ -2,15 +2,19 @@ import React from 'react';
 
 
 class ExerciseForm extends React.Component {
-    constructor() {
+    constructor(props) {
         super();
         this.state = {
             currentItem: 'squats',
             currentDescription: 'pistol squats',
             currentReps: '3',
+            lastDescription: "enter a description",
+            date: props.dateString,
+            workouts: props.allWorkouts
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateDescription = this.updateDescription.bind(this);
     }
 
     handleChange(e) {
@@ -22,6 +26,16 @@ class ExerciseForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         this.props.submitForm(this.state);
+        this.updateDescription();
+        this.setState({
+            currentDescription: '',
+        })
+    }
+
+    updateDescription() {
+        const date = this.state.date;
+        const workouts = this.state.workouts;
+        console.log(workouts[date]);
         this.setState({
             currentDescription: '',
         })
@@ -94,7 +108,7 @@ class ExerciseForm extends React.Component {
                             <label htmlFor="currentDescription" className="hidden">enter a description</label>
                             <input
                                 id="currentDescription"
-                                placeholder="enter a description"
+                                placeholder={this.state.lastDescription}
                                 type="text"
                                 value={this.state.currentDescription}
                                 onChange={this.handleChange}
