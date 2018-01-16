@@ -1,8 +1,27 @@
 /* Global styles */
 
 $darkColor: black;
-$lightColor: white;
+$lightColor: yellow;
+$accentColor: rgb(181, 247, 241);
 
+$headingFont: 'Caesar Dressing', sans-serif;
+$otherFont: 'Open Sans', sans-serif;
+
+html {
+    font-family: $otherFont;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $headingFont;
+}
+
+header, footer, button {
+    background: $darkColor;
+    color: $lightColor;
+}
+
+button {
+    text-transform: uppercase;
+}
 
 .flex {
     display: flex;
@@ -14,20 +33,15 @@ $lightColor: white;
     flex-direction: column;
 }
 
-.workout {
-    margin-bottom: 20px;
-    max-width: 90%;
-    list-style-type: none;
-    flex-wrap: wrap;
+/* Form styles */
+
+form {
+    justify-content: center;
 }
 
-.workout li{
-    margin: 40px 10px;
-    width: 20%;
-}
-
-.workouts h2{
-    background: yellow;
+.exerciseForm {
+    justify-content: space-around;
+    padding: 20px;
 }
 
 .modal {
@@ -42,17 +56,47 @@ $lightColor: white;
     display: flex;
 }
 
-form {
-    justify-content: center;
+/* Workout styles */
+.workouts h2{
+    background: $lightColor;
 }
 
-.exerciseForm {
-    justify-content: space-around;
+.workout {
+    // margin-bottom: 20px;
+    // max-width: 90%;
+    list-style-type: none;
+    flex-wrap: wrap;
+    background: lighten($darkColor, 90);
+    padding: 0;
+}
+
+.workout li{
+    margin: 10px;
+    width: 20%;
 }
 
 .exerciseItem {
-    background: lightseagreen;
+    background: $accentColor;
+    padding: 10px;
     h4, h6 {
         text-transform: capitalize;
+        font-size: 1.5rem;
     }
+    h4 {
+        font-size: 2rem;
+        
+    }
+    & span {
+        font-family: $otherFont;
+        font-weight: 700;
+        text-align: right;
+        background: $lightColor;
+        border-radius: 50%;
+    }
+}
+
+.allWorkouts h2 {
+    margin: 0;
+    margin-top: 50px;
+    padding: 20px;
 }

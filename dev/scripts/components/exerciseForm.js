@@ -47,6 +47,7 @@ class ExerciseForm extends React.Component {
                 <section className={`exerciseForm flex`}>
                     <div className="exercise">
                         <div className="radio">
+                            <label>Exercise:</label>
                             <div className="radioInput">
                                 <input
                                     id="currentItem"
@@ -105,7 +106,7 @@ class ExerciseForm extends React.Component {
                         </div>
 
                         <div className="textInputs">
-                            <label htmlFor="currentDescription" className="hidden">enter a description</label>
+                            <label htmlFor="currentDescription" className="hidden">Enter a description</label>
                             <input
                                 id="currentDescription"
                                 placeholder={this.state.lastDescription}
@@ -119,7 +120,7 @@ class ExerciseForm extends React.Component {
                     {/* end exercise and description */}
                     
                     <div className="radio">
-                        <label>Number of Reps</label>
+                        <label>Number of Reps:</label>
                         <div className="radioInput">
                             <input
                                 type="radio"
