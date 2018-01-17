@@ -8,13 +8,14 @@ class ExerciseForm extends React.Component {
             currentItem: 'squats',
             currentDescription: 'pistol squats',
             currentReps: '3',
-            lastDescription: "enter a description",
-            date: props.dateString,
-            workouts: props.allWorkouts
+            lastDescription: 'enter a description',
+            lastWorkout: props.lastWorkout
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.updateDescription = this.updateDescription.bind(this);
+
+        // console.log(this.state.lastWorkout)
     }
 
     handleChange(e) {

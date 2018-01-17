@@ -28,8 +28,8 @@ class App extends React.Component {
       allWorkouts: [],
       allDates:[],
       toggleAdd: false,
-      toggleDate: false,
-      dateString: null
+      dateString: null,
+      lastWorkout: []
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -41,17 +41,17 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getDate();
-    console.log('date set', this.state.dateString)
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const workoutApp = firebase.database().ref(`/users/${user.uid}`);
-
+        
         workoutApp.on('value', (snapshot) => {
           const allWorkouts = [];
           const allDates = [];
-
+          
           let workoutInfo = snapshot.val();
-          for (let date in workoutInfo) {
+
+          for (let date in workoutInfo) {            
             const workoutsOnDate = [];
             const workouts = workoutInfo[date];
             allDates.push(date);
@@ -64,13 +64,26 @@ class App extends React.Component {
           }
           allWorkouts.reverse();
           allDates.reverse();
-          console.log('date set', this.state.dateString)
+          let lastWorkout = [];
+          // console.log('date in DB', this.state.dateString);
+          // console.log(allWorkouts);
+          // console.log(allWorkouts[allDates[0]]);
+          // console.log(allWorkouts);
+          // console.log(allDates);
+          if (allDates[0] === this.state.dateString) {
+            lastWorkout = allWorkouts[1];
+            console.log('2nd last workout ', lastWorkout );
+          } else {
+            lastWorkout = allWorkouts[0];
+            console.log(' last workout ', lastWorkout);
+          }
           
           this.setState({
             user,
             loggedIn: true,
             allWorkouts,
-            allDates
+            allDates,
+            lastWorkout
           })
         });
       }
@@ -105,7 +118,6 @@ class App extends React.Component {
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
-    console.log('dateString',dateString);
     this.setState({
       dateString
     })
@@ -158,7 +170,7 @@ class App extends React.Component {
         </header>
 
         <button onClick={this.toggleAddFunction}>Add Exercise</button>
-        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} allWorkouts={this.state.allWorkouts}/> : ''} 
+        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} lastWorkout={this.state.lastWorkout}/> : ''} 
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
