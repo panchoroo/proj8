@@ -6,41 +6,54 @@ class ExerciseForm extends React.Component {
         super();
         this.state = {
             currentItem: 'squats',
-            currentDescription: 'pistol squats',
+            currentDescription: 'pistol',
             currentReps: '3',
-            lastDescription: 'enter a description',
+            lastDescription: 'pistol',
+            lastReps: [],
+            date: props.date,
             lastWorkout: props.lastWorkout
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.updateDescription = this.updateDescription.bind(this);
+        // this.updateDescription = this.updateDescription.bind(this);
 
-        // console.log(this.state.lastWorkout)
     }
 
     handleChange(e) {
+        let lastDescription = this.state.lastDescription;
+        let lastReps = [];
+        if (e.target.name === "exercise") {
+            for (let exercise in this.state.lastWorkout) {
+                if (this.state.lastWorkout[exercise].currentItem === e.target.value) {
+
+                    lastDescription = this.state.lastWorkout[exercise].currentDescription;
+
+                    lastReps.push(this.state.lastWorkout[exercise].currentReps+',')
+                }
+            }
+        }
+        
         this.setState({
-            [e.target.id]: e.target.value
+            [e.target.id]: e.target.value,
+            lastDescription,
+            lastReps
         })
     }
 
     handleSubmit(e) {
         e.preventDefault();
         this.props.submitForm(this.state);
-        this.updateDescription();
         this.setState({
             currentDescription: '',
         })
     }
 
-    updateDescription() {
-        const date = this.state.date;
-        const workouts = this.state.workouts;
-        console.log(workouts[date]);
-        this.setState({
-            currentDescription: '',
-        })
-    }
+    // updateDescription() {
+    //     // const workouts = this.state.workouts;
+    //     this.setState({
+    //         currentDescription: '',
+    //     })
+    // }
 
     render() {
         return (
@@ -116,6 +129,9 @@ class ExerciseForm extends React.Component {
                                 onChange={this.handleChange}
                                 required="required"
                             />
+                            {this.state.currentItem !== 'other' ? 
+                                <h4>Last time you did {this.state.lastReps} of {this.state.lastDescription} {this.state.currentItem}</h4>
+                            : <h4>Enter your own exercise</h4>}
                         </div>
                     </div>
                     {/* end exercise and description */}

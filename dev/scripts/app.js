@@ -65,17 +65,10 @@ class App extends React.Component {
           allWorkouts.reverse();
           allDates.reverse();
           let lastWorkout = [];
-          // console.log('date in DB', this.state.dateString);
-          // console.log(allWorkouts);
-          // console.log(allWorkouts[allDates[0]]);
-          // console.log(allWorkouts);
-          // console.log(allDates);
           if (allDates[0] === this.state.dateString) {
             lastWorkout = allWorkouts[1];
-            console.log('2nd last workout ', lastWorkout );
           } else {
             lastWorkout = allWorkouts[0];
-            console.log(' last workout ', lastWorkout);
           }
           
           this.setState({
@@ -133,8 +126,7 @@ class App extends React.Component {
     console.log('date additem', date)
     console.log('item additem', item.currentItem)
     console.log(`/users/${this.state.user.uid}/${date}/`)
-    // const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
-    const workoutApp = firebase.database().ref(`/users/TgYMXxNaP5UNT1HqtZCXgAKACLn1/1-16-2018`);
+    const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
     
     workoutApp.push(newItem);
   }
@@ -170,7 +162,7 @@ class App extends React.Component {
         </header>
 
         <button onClick={this.toggleAddFunction}>Add Exercise</button>
-        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} lastWorkout={this.state.lastWorkout}/> : ''} 
+        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout}/> : ''} 
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
