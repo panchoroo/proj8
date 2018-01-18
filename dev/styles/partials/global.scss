@@ -1,26 +1,52 @@
 /* Global styles */
 
+// $darkColor: #2C302E;
 $darkColor: black;
-$lightColor: yellow;
-$accentColor: rgb(181, 247, 241);
+// $lightColor: white;
+// $lightColor: rgba(252, 203, 27, 0.82) ;
+$lightColor: rgb(252, 199, 27) ;
+// $accentColor: rgb(181, 247, 241);
+$accentColor: lighten(#537A5A, 20);
+// $accentColor2: #909590;
+// $accentColor3: #474A48;
+// $accentColor4: yellow;
+// $accentColor2: rgba(240, 62, 106, 0.822);
+// $accentColor2: rgba(96, 46, 116, 0.822);
+$accentColor3: rgba(96, 46, 116, 0.822);
+$accentColor2: rgba(26, 25, 26, 0.884);
+// $accentColor4: rgba(249, 138, 90, 0.82) ;
+$accentColor4: rgba(153, 152, 153, 0.884) ;
+// $accentColor4: rgba(255, 205, 10, 0.82) ;
 
-$headingFont: 'Caesar Dressing', sans-serif;
+$headingFont: 'Acme', sans-serif;
 $otherFont: 'Open Sans', sans-serif;
 
 html {
     font-family: $otherFont;
+    // background: lighten($darkColor, 40);
+    background: $accentColor4;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $headingFont;
+    letter-spacing: 3pt;
+    color: $lightColor;
 }
 
 header, footer, button {
-    background: $darkColor;
+    background: $accentColor2;
     color: $lightColor;
 }
 
 button {
     text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    border: 2px solid $lightColor;
+}
+
+a {
+    color: $lightColor;
 }
 
 .flex {
@@ -58,7 +84,7 @@ form {
 
 /* Workout styles */
 .workouts h2{
-    background: $lightColor;
+    background: $accentColor2;
 }
 
 .workout {
@@ -66,32 +92,40 @@ form {
     // max-width: 90%;
     list-style-type: none;
     flex-wrap: wrap;
-    background: lighten($darkColor, 90);
+    // background: $accentColor3;
+    // background: linear-gradient($accentColor2,$accentColor4);
+    // background: linear-gradient(rgba(46, 46, 46, 0.329), rgba(46, 46, 46, 0.048));;
+    background: white;
     padding: 0;
+
 }
 
-.workout li{
-    margin: 10px;
-    width: 20%;
-}
 
 .exerciseItem {
-    background: $accentColor;
+    margin: 10px;
+    width: 20%; 
+    background: linear-gradient($accentColor2,$accentColor4);
+    // background: linear-gradient(rgba(46, 46, 46, 0.329), rgba(46, 46, 46, 0.048));;
     padding: 10px;
     h4, h6 {
         text-transform: capitalize;
         font-size: 1.5rem;
+        margin: 5px;
     }
     h4 {
         font-size: 2rem;
+        
         
     }
     & span {
         font-family: $otherFont;
         font-weight: 700;
         text-align: right;
-        background: $lightColor;
+        // background: $lightColor;
+        background: $accentColor2;
         border-radius: 50%;
+        padding: 0 13px;
+        // color: $darkColor;
     }
 }
 
