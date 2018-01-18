@@ -23,14 +23,24 @@ class ExerciseForm extends React.Component {
         let lastDescription = this.state.lastDescription;
         let lastReps = [];
         if (e.target.name === "exercise") {
+
+            let counter = 0;
             for (let exercise in this.state.lastWorkout) {
+                
                 if (this.state.lastWorkout[exercise].currentItem === e.target.value) {
 
                     lastDescription = this.state.lastWorkout[exercise].currentDescription;
 
-                    lastReps.push(this.state.lastWorkout[exercise].currentReps+',')
+                    if (counter === 0) {
+                        lastReps.push('(' + this.state.lastWorkout[exercise].currentReps + ', ');
+                    }
+                    else {
+                        lastReps.push(this.state.lastWorkout[exercise].currentReps + ', ');
+                    }
+                    counter += 1;
                 }
             }
+            lastReps[counter - 1] = lastReps[counter - 1].substr(0, lastReps[counter - 1].length - 2) + ')';
         }
         
         this.setState({

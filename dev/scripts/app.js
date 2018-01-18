@@ -37,6 +37,7 @@ class App extends React.Component {
     this.toggleAddFunction = this.toggleAddFunction.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.getDate = this.getDate.bind(this);
+
   }
 
   componentDidMount() {
@@ -108,8 +109,8 @@ class App extends React.Component {
     const newDate = new Date();
     let dateString = '';
     // Get the month, day, and year  
-    dateString += (newDate.getMonth() + 1) + '-';
-    dateString += newDate.getDate() + '-';
+    dateString += (newDate.getMonth() + 1) + ' - ';
+    dateString += newDate.getDate() + ' - ';
     dateString += newDate.getFullYear(); 
     this.setState({
       dateString
@@ -152,17 +153,19 @@ class App extends React.Component {
       <div>
         <header className='flex'>
           <h1>💪 Workout App</h1>
+
+          <button onClick={this.toggleAddFunction}> <i className="fa fa-plus-circle" aria-hidden="true"></i>add workout</button>
+          {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout}/> : ''} 
           
           <div className="flex">
-            {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!`}</h3>: ''}
+            {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
 
-            {this.state.loggedIn ? <a href='' onClick={this.logout}>Log out</a> : <a href='' onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle" aria-hidden="true"></i> Log out</a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
-          
+        
         </header>
 
-        <button onClick={this.toggleAddFunction}>Add Exercise</button>
-        {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout}/> : ''} 
+        {/* <i class="fa fa-bars"></i> */}
 
         <section className='workouts'>
           <ul className='workoutsByDate'>

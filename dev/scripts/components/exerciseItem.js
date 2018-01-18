@@ -6,10 +6,9 @@ const ExerciseItem = (props) => {
         const date = props.date;
         
         return (
-            <li className='exerciseItem flexColumn'>
-                <h4>{item} <span>{props.reps}</span></h4>
-                <h6>{props.desc}</h6>
-                <button onClick={() => props.delete(date, props.index)}>delete</button>
+            <li className='exerciseItem flex'>
+                <h4><span>{props.reps}</span> {item}{': ' + props.desc}</h4>
+                <button onClick={() => props.delete(date, props.index)}><i className="fa fa-times-circle" aria-hidden="true"></i>delete</button>
             </li>
         )
     }

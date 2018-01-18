@@ -4,7 +4,8 @@
 $darkColor: black;
 // $lightColor: white;
 // $lightColor: rgba(252, 203, 27, 0.82) ;
-$lightColor: rgb(252, 199, 27) ;
+$lightColor: #fcc71b;
+$lightColor2: white;
 // $accentColor: rgb(181, 247, 241);
 $accentColor: lighten(#537A5A, 20);
 // $accentColor2: #909590;
@@ -18,17 +19,20 @@ $accentColor2: rgba(26, 25, 26, 0.884);
 $accentColor4: rgba(153, 152, 153, 0.884) ;
 // $accentColor4: rgba(255, 205, 10, 0.82) ;
 
-$headingFont: 'Acme', sans-serif;
-$otherFont: 'Open Sans', sans-serif;
+$headingFont: 'Open Sans ', sans-serif;
+$otherFont: 'Roboto', sans-serif;
 
 html {
     font-family: $otherFont;
     // background: lighten($darkColor, 40);
-    background: $accentColor4;
+    // background: $accentColor4;
+    background: $darkColor;
 }
 h1, h2, h3, h4, h5, h6 {
-    font-family: $headingFont;
-    letter-spacing: 3pt;
+    // font-family: $headingFont;
+    font-family: $otherFont;
+    font-weight: 300;
+    // letter-spacing: 1.5pt;
     color: $lightColor;
 }
 
@@ -37,12 +41,18 @@ header, footer, button {
     color: $lightColor;
 }
 
+
+
 button {
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 10px;
     padding: 5px 10px;
     border: 2px solid $lightColor;
+}
+
+button>i.fa {
+    margin-right: 5px;
 }
 
 a {
@@ -83,19 +93,28 @@ form {
 }
 
 /* Workout styles */
+
+.workoutsByDate {
+    margin: 0;
+    padding: 0;
+    background: $darkColor;
+}
 .workouts h2{
-    background: $accentColor2;
+    // background: $accentColor2;
+    background: linear-gradient($lightColor, $lightColor2, $lightColor);
+    color: $darkColor;
 }
 
 .workout {
-    // margin-bottom: 20px;
+    margin-bottom: 50px;
     // max-width: 90%;
     list-style-type: none;
     flex-wrap: wrap;
     // background: $accentColor3;
     // background: linear-gradient($accentColor2,$accentColor4);
     // background: linear-gradient(rgba(46, 46, 46, 0.329), rgba(46, 46, 46, 0.048));;
-    background: white;
+    // background: white;
+    background: $darkColor;
     padding: 0;
 
 }
@@ -103,34 +122,31 @@ form {
 
 .exerciseItem {
     margin: 10px;
-    width: 20%; 
-    background: linear-gradient($accentColor2,$accentColor4);
+    width: calc(50% - 20px); 
+    // background: linear-gradient($accentColor2,$accentColor4);
+    background: linear-gradient($accentColor4, $accentColor2);
     // background: linear-gradient(rgba(46, 46, 46, 0.329), rgba(46, 46, 46, 0.048));;
     padding: 10px;
-    h4, h6 {
-        text-transform: capitalize;
-        font-size: 1.5rem;
-        margin: 5px;
-    }
     h4 {
+        text-transform: capitalize;
         font-size: 2rem;
-        
-        
+        margin: 5px;
     }
     & span {
         font-family: $otherFont;
         font-weight: 700;
         text-align: right;
-        // background: $lightColor;
-        background: $accentColor2;
+        // background: $accentColor2;
         border-radius: 50%;
         padding: 0 13px;
-        // color: $darkColor;
+        // background: $lightColor;
+        background: radial-gradient($lightColor2, $lightColor 10%);
+        color: $darkColor;
     }
 }
 
 .allWorkouts h2 {
     margin: 0;
-    margin-top: 50px;
+    // margin-top: 50px;
     padding: 20px;
 }
