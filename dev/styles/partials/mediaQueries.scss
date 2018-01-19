@@ -1,0 +1,15 @@
+/* Media query styles */
+
+@media (max-width: 900px) { 
+    .exerciseItem {
+        width: 100%;
+    }
+}
+
+
+@media (max-width: 690px) { 
+    // add item modal
+    .modal {
+        width: 100%;
+    }
+}

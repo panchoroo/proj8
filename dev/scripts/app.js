@@ -112,7 +112,7 @@ class App extends React.Component {
     let dateFooter = '';
     // Get the month, day, and year  
     dateString += (newDate.getMonth() + 1) + '-';
-    dateString += newDate.getDate() + ' - ';
+    dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
 
     dateFooter = newDate.getFullYear();
