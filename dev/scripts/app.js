@@ -161,7 +161,7 @@ class App extends React.Component {
           <div className="flex">
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
 
-            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle" aria-hidden="true"></i> Log out</a> : <a href='' onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle-o" aria-hidden="true"></i> Log out</a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
         
         </header>

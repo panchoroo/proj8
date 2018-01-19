@@ -9,7 +9,7 @@ class ExerciseForm extends React.Component {
             currentItem: 'squats',
             currentDescription: 'pistol',
             currentReps: '3',
-            lastDescription: 'pistol',
+            lastDescription: '',
             lastReps: [],
             date: props.date,
             lastWorkout: props.lastWorkout
@@ -17,7 +17,12 @@ class ExerciseForm extends React.Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.displayModal = this.displayModal.bind(this);
+        this.getLast = this.getLast.bind(this);
+        
+    }
 
+    componentDidMount() {
+        this.getLast('squats');
     }
 
     displayModal(e) {
@@ -29,34 +34,46 @@ class ExerciseForm extends React.Component {
         })
     }
 
-    handleChange(e) {
-        let lastDescription = this.state.lastDescription;
+    getLast(e) {
+        let counter = 0;
+        let lastDescription = '';
         let lastReps = [];
-        if (e.target.name === "exercise") {
-
-            let counter = 0;
-            for (let exercise in this.state.lastWorkout) {
-                
-                if (this.state.lastWorkout[exercise].currentItem === e.target.value) {
-
-                    lastDescription = this.state.lastWorkout[exercise].currentDescription;
-
-                    if (counter === 0) {
-                        lastReps.push('(' + this.state.lastWorkout[exercise].currentReps + ', ');
-                    }
-                    else {
-                        lastReps.push(this.state.lastWorkout[exercise].currentReps + ', ');
-                    }
-                    counter += 1;
-                }
-            }
-            lastReps[counter - 1] = lastReps[counter - 1].substr(0, lastReps[counter - 1].length - 2) + ')';
+        let exerciseName = '';
+        if (typeof(e) === 'string') {
+            exerciseName = e;
+        } else {
+            exerciseName = e.target.value;
         }
-        
+
+        for (let exercise in this.state.lastWorkout) {
+
+            if (this.state.lastWorkout[exercise].currentItem === exerciseName) {
+
+                lastDescription = this.state.lastWorkout[exercise].currentDescription;
+
+                if (counter === 0) {
+                    lastReps.push('(' + this.state.lastWorkout[exercise].currentReps + ', ');
+                }
+                else {
+                    lastReps.push(this.state.lastWorkout[exercise].currentReps + ', ');
+                }
+                counter += 1;
+            }
+        }
+        lastReps[counter - 1] = lastReps[counter - 1].substr(0, lastReps[counter - 1].length - 2) + ')';
+
         this.setState({
-            [e.target.id]: e.target.value,
             lastDescription,
             lastReps
+        })
+    }
+
+    handleChange(e) {
+        if (e.target.name === "exercise" && e.target.value !== 'other') {
+            this.getLast(e);
+        }
+        this.setState({
+            [e.target.id]: e.target.value
         })
     }
 
@@ -73,6 +90,7 @@ class ExerciseForm extends React.Component {
             <div>
             {this.state.displayModal ? 
             <form action="" className={`modal flexColumn`} onSubmit={this.handleSubmit}>
+            {/* {this.state.lastDescription ? this.getLast('squats') : ''} */}
                 <section className={`exerciseForm flex`}>
                     <div className="exerciseInput">
                         <label className="primaryLabel">Exercise:</label>
@@ -144,7 +162,7 @@ class ExerciseForm extends React.Component {
                                 onChange={this.handleChange}
                                 required="required"
                             />
-                            {this.state.currentItem !== 'other' ? 
+                            {this.state.currentItem !== 'other' && this.state.lastDescription ? 
                                 <h4>Last time you did {this.state.lastReps} of {this.state.lastDescription} {this.state.currentItem}</h4>
                             : <h4>Enter your own exercise</h4>}
                         </div>
