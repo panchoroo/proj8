@@ -21,7 +21,7 @@
 .exerciseItem {
     margin: 10px;
     width: calc(50% - 20px); 
-    background: linear-gradient($accentColor4, $accentColor2);
+    background: linear-gradient($accentColor, $accentColor2);
     padding: 10px;
     h4 {
         text-transform: capitalize;
