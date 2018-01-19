@@ -74,9 +74,9 @@ class ExerciseForm extends React.Component {
             {this.state.displayModal ? 
             <form action="" className={`modal flexColumn`} onSubmit={this.handleSubmit}>
                 <section className={`exerciseForm flex`}>
-                    <div className="exercise">
+                    <div className="exerciseInput">
+                        <label className="primaryLabel">Exercise:</label>
                         <div className="radio">
-                            <label>Exercise:</label>
                             <div className="radioInput">
                                 <input
                                     id="currentItem"
@@ -135,7 +135,7 @@ class ExerciseForm extends React.Component {
                         </div>
 
                         <div className="textInputs">
-                            <label htmlFor="currentDescription" className="hidden">Enter a description</label>
+                            <label htmlFor="currentDescription" className={`hidden primaryLabel`}>Enter a description</label>
                             <input
                                 id="currentDescription"
                                 placeholder={this.state.lastDescription}
@@ -150,9 +150,9 @@ class ExerciseForm extends React.Component {
                         </div>
                     </div>
                     {/* end exercise and description */}
-                    
-                    <div className="radio">
-                        <label>Number of Reps:</label>
+                    <div className="">
+                        <label className="primaryLabel">Number of Reps:</label>
+                        <div className="repsInput">
                         <div className="radioInput">
                             <input
                                 type="radio"
@@ -214,9 +214,10 @@ class ExerciseForm extends React.Component {
                             />
                             <label htmlFor="8">8</label>
                         </div>
-                        
+                    </div>  
                     </div>
                 </section>
+
                 <div className={`flex modalButtons`}>
                     <button type="submit"><i className="fa fa-check-circle" aria-hidden="true"></i> Submit</button>
                     <button type="button" onClick={this.displayModal} ><i className="fa fa-times-circle" aria-hidden="true"></i> Close</button>   

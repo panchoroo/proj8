@@ -154,7 +154,7 @@ class App extends React.Component {
         <header className='flex'>
           <h1>💪 Workout App</h1>
 
-          <button onClick={this.toggleAddFunction}> <i className="fa fa-plus-circle" aria-hidden="true"></i>add workout</button>
+          <button onClick={this.toggleAddFunction} className="addButton"> <i className="fa fa-plus-circle" aria-hidden="true"></i>add workout</button>
 
           {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> : ''} 
           

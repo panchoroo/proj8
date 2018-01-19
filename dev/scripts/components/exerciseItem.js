@@ -7,7 +7,8 @@ const ExerciseItem = (props) => {
         
         return (
             <li className='exerciseItem flex'>
-                <h4><span>{props.reps}</span> {item}{': ' + props.desc}</h4>
+                <h4 className='exerciseName'><span>{props.reps}</span>{item + ': '}</h4>
+                <h4>{ props.desc}</h4>
                 <button onClick={() => props.delete(date, props.index)}><i className="fa fa-times-circle" aria-hidden="true"></i>delete</button>
             </li>
         )

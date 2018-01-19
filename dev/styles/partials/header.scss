@@ -4,9 +4,16 @@ header {
     align-items: baseline;
     width: 100%;
     margin: 0;
-    padding: 30px 20px 40px 20px ;
-}
+    padding: 30px 20px 40px 20px;
 
-header h1{
-    color: lightColor2;
+    button.addButton {
+        color: $lightColor2;
+        padding: 10px 20px;
+        &:hover {
+            transition: .5s;
+            background: $lightColor;
+            color: $darkColor;
+            border-color: $lightColor2;
+        }
+    }
 }
