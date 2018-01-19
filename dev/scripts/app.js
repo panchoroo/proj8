@@ -29,6 +29,7 @@ class App extends React.Component {
       allDates:[],
       toggleAdd: false,
       dateString: null,
+      dateFooter: '',
       lastWorkout: []
     }
     this.login = this.login.bind(this);
@@ -108,12 +109,17 @@ class App extends React.Component {
   getDate() {
     const newDate = new Date();
     let dateString = '';
+    let dateFooter = '';
     // Get the month, day, and year  
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + ' - ';
     dateString += newDate.getFullYear(); 
+
+    dateFooter = newDate.getFullYear();
+
     this.setState({
-      dateString
+      dateString,
+      dateFooter
     })
   }
 
@@ -133,7 +139,6 @@ class App extends React.Component {
   }
 
   toggleAddFunction() {
-    // e.preventDefault();
     let toggleAdd = true;
     if (this.state.toggleAdd) {
       toggleAdd = false;
@@ -147,7 +152,6 @@ class App extends React.Component {
     firebase.database().ref(`/users/${this.state.user.uid}/${date}/${index}`).remove();
   }
   
-
   render() {
     return (
       <div>
@@ -175,6 +179,10 @@ class App extends React.Component {
             })}
           </ul>
         </section>
+
+        <footer>
+          <p>Copyright © {this.state.dateFooter} Amie Everett</p>
+        </footer>
 
       </div>
     )

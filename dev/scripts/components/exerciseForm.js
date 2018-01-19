@@ -89,9 +89,9 @@ class ExerciseForm extends React.Component {
         return (
             <div>
             {this.state.displayModal ? 
-            <form action="" className={`modal flexColumn`} onSubmit={this.handleSubmit}>
+            <form action="" className={`modal flex`} onSubmit={this.handleSubmit}>
             {/* {this.state.lastDescription ? this.getLast('squats') : ''} */}
-                <section className={`exerciseForm flex`}>
+                <section className={`exerciseForm flex `}>
                     <div className="exerciseInput">
                         <label className="primaryLabel">Exercise:</label>
                         <div className="radio">
@@ -234,12 +234,14 @@ class ExerciseForm extends React.Component {
                         </div>
                     </div>  
                     </div>
-                </section>
 
                 <div className={`flex modalButtons`}>
                     <button type="submit"><i className="fa fa-check-circle" aria-hidden="true"></i> Submit</button>
                     <button type="button" onClick={this.displayModal} ><i className="fa fa-times-circle" aria-hidden="true"></i> Close</button>   
                 </div>
+
+                </section>
+
             </form> : ''}
             
             </div>
