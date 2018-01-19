@@ -5,6 +5,7 @@ class ExerciseForm extends React.Component {
     constructor(props) {
         super();
         this.state = {
+            displayModal: true,
             currentItem: 'squats',
             currentDescription: 'pistol',
             currentReps: '3',
@@ -15,8 +16,17 @@ class ExerciseForm extends React.Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        // this.updateDescription = this.updateDescription.bind(this);
+        this.displayModal = this.displayModal.bind(this);
 
+    }
+
+    displayModal(e) {
+        e.preventDefault()
+        const displayModal = false;
+        this.props.toggleAdd();
+        this.setState ({
+            displayModal
+        })
     }
 
     handleChange(e) {
@@ -58,15 +68,10 @@ class ExerciseForm extends React.Component {
         })
     }
 
-    // updateDescription() {
-    //     // const workouts = this.state.workouts;
-    //     this.setState({
-    //         currentDescription: '',
-    //     })
-    // }
-
     render() {
         return (
+            <div>
+            {this.state.displayModal ? 
             <form action="" className={`modal flexColumn`} onSubmit={this.handleSubmit}>
                 <section className={`exerciseForm flex`}>
                     <div className="exercise">
@@ -212,8 +217,13 @@ class ExerciseForm extends React.Component {
                         
                     </div>
                 </section>
-                <button type="submit">Submit</button>
-            </form>
+                <div className={`flex modalButtons`}>
+                    <button type="submit"><i className="fa fa-check-circle" aria-hidden="true"></i> Submit</button>
+                    <button type="button" onClick={this.displayModal} ><i className="fa fa-times-circle" aria-hidden="true"></i> Close</button>   
+                </div>
+            </form> : ''}
+            
+            </div>
         )
     }
 }

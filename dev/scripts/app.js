@@ -109,7 +109,7 @@ class App extends React.Component {
     const newDate = new Date();
     let dateString = '';
     // Get the month, day, and year  
-    dateString += (newDate.getMonth() + 1) + ' - ';
+    dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + ' - ';
     dateString += newDate.getFullYear(); 
     this.setState({
@@ -132,8 +132,8 @@ class App extends React.Component {
     workoutApp.push(newItem);
   }
 
-  toggleAddFunction(e) {
-    e.preventDefault();
+  toggleAddFunction() {
+    // e.preventDefault();
     let toggleAdd = true;
     if (this.state.toggleAdd) {
       toggleAdd = false;
@@ -155,7 +155,8 @@ class App extends React.Component {
           <h1>💪 Workout App</h1>
 
           <button onClick={this.toggleAddFunction}> <i className="fa fa-plus-circle" aria-hidden="true"></i>add workout</button>
-          {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout}/> : ''} 
+
+          {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> : ''} 
           
           <div className="flex">
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
