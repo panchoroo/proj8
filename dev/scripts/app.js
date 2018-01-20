@@ -8,12 +8,12 @@ import ExerciseItem from './components/exerciseItem';
 
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyAfAXV9F7xqOalWzBPFRXzfnb6G1H7oBlw",
-  authDomain: "workout-app-4f669.firebaseapp.com",
-  databaseURL: "https://workout-app-4f669.firebaseio.com",
-  projectId: "workout-app-4f669",
-  storageBucket: "",
-  messagingSenderId: "701827082182"
+  apiKey: 'AIzaSyAfAXV9F7xqOalWzBPFRXzfnb6G1H7oBlw',
+  authDomain: 'workout-app-4f669.firebaseapp.com',
+  databaseURL: 'https://workout-app-4f669.firebaseio.com',
+  projectId: 'workout-app-4f669',
+  storageBucket: '',
+  messagingSenderId: '701827082182'
 };
 firebase.initializeApp(config);
 
@@ -156,19 +156,19 @@ class App extends React.Component {
         <header id='header' className='flex'>
           <h1>💪 Workout App</h1>
 
-          <button onClick={this.toggleAddFunction} className="addButton"> <i className="fa fa-plus-circle" aria-hidden="true"></i><span className='buttonTextSpan'>add workout</span></button>
+          <button onClick={this.toggleAddFunction} className='addButton'> <i className='fa fa-plus-circle' aria-hidden='true'></i><span className='buttonTextSpan'>add workout</span></button>
 
           {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> : ''} 
           
-          <div className="flex">
+          <div className='flex'>
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
 
-            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times" aria-hidden="true"></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className='fa fa-times' aria-hidden='true'></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
         
         </header>
 
-        <a href='#header' className='backToTop'><i className="fa fa-arrow-up"> </i><span className='buttonTextSpan'>Back to Top</span></a>
+        <a href='#header' className='backToTop'><i className='fa fa-arrow-up'> </i><span className='buttonTextSpan'>Back to Top</span></a>
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
@@ -180,7 +180,7 @@ class App extends React.Component {
 
         <footer className='flex'>
           <p>Copyright © {this.state.dateFooter} Amie Everett</p> 
-          <p>Learn more about <a href="https://www.reddit.com/r/bodyweightfitness/">Bodyweight fitness</a></p>
+          <p>Learn more about <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight fitness</a></p>
           
         </footer>
 

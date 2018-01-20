@@ -13,7 +13,7 @@ const WorkoutItem = (props) => {
             workouts.push(index[i]);
         }
             return (
-                <div className="allWorkouts">
+                <div className='allWorkouts'>
                     <h2>{date}</h2>
                     <ul className={`workout flex`}>
                         {workouts.map((eachEx, index) => {
