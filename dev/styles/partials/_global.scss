@@ -69,4 +69,15 @@ a {
 footer {
     padding: 20px;
     text-align: center;
+    justify-content: baseline;
+}
+
+.backToTop {
+    position: fixed;
+    right: calc(50% - 23px);
+    bottom: 20px;
+    background: $accentColor2;
+    padding: 6px 4px 8px 0px;
+    border-radius: 10px;
+    border: 2px solid $accentColor;
 }

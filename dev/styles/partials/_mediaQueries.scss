@@ -27,11 +27,18 @@
 }
 
 
-@media (max-width: 690px) { 
+@media (max-width: 700px) { 
     // add item modal
-    .modal {
-        width: 100%;
+    .modal .exerciseForm {
+        flex-direction: column;
+        padding: 20px;
+
+        h4 {
+            margin-bottom: 30px;
+        }
     }
+    
+
 }
 
 @media (max-width: 610px) { 
@@ -56,8 +63,24 @@
         }
     }
 
+    input[type='text'] {
+        margin: 15px;
+    }
+    
 }
 
 @media (max-width: 400px) { 
     //header 
+    .modalButtons {
+        flex-direction: column;
+    }
+    button.addButton {
+        margin-left: 20px;
+    }
+}
+
+@media (max-height: 800px) { 
+    .modal {
+        height: 800px;
+    }
 }

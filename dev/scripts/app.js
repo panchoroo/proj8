@@ -153,7 +153,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <header className='flex'>
+        <header id='header' className='flex'>
           <h1>💪 Workout App</h1>
 
           <button onClick={this.toggleAddFunction} className="addButton"> <i className="fa fa-plus-circle" aria-hidden="true"></i><span className='buttonTextSpan'>add workout</span></button>
@@ -168,7 +168,7 @@ class App extends React.Component {
         
         </header>
 
-        {/* <i class="fa fa-bars"></i> */}
+        <a href='#header' className='backToTop'><i className="fa fa-arrow-up"> </i><span className='buttonTextSpan'>Back to Top</span></a>
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
@@ -178,8 +178,10 @@ class App extends React.Component {
           </ul>
         </section>
 
-        <footer>
-          <p>Copyright © {this.state.dateFooter} Amie Everett</p>
+        <footer className='flex'>
+          <p>Copyright © {this.state.dateFooter} Amie Everett</p> 
+          <p>Learn more about <a href="https://www.reddit.com/r/bodyweightfitness/">Bodyweight fitness</a></p>
+          
         </footer>
 
       </div>
