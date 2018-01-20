@@ -130,7 +130,7 @@ class App extends React.Component {
       currentDescription: item.currentDescription,
       currentReps: item.currentReps
     }
-    
+
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
     
     workoutApp.push(newItem);
@@ -163,7 +163,7 @@ class App extends React.Component {
           <div className="flex">
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
 
-            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle-o" aria-hidden="true"></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times" aria-hidden="true"></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
         
         </header>

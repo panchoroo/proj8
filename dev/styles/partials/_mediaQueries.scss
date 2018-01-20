@@ -6,13 +6,23 @@
     }
     // make fa icons with hover text in after element?
     span.buttonTextSpan {
-        background: lightcoral;
         display: none;
 
         &:hover, &:focus {
             position: absolute;
             display: block;
         }
+    }
+
+    a>i, button {
+        border-radius: 50%;
+        padding: 5px 7px;
+        border: 2px solid $lightColor;
+        margin-left: 5px;
+    }
+
+    button.addButton, .modalButtons>button {
+        border-radius: 10px;
     }
 }
 
@@ -22,4 +32,32 @@
     .modal {
         width: 100%;
     }
+}
+
+@media (max-width: 610px) { 
+    button.addButton {
+        margin-left: 21%;
+    }
+    header {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 470px) { 
+    // exercise items need to be multiple lines
+    .exerciseItem {
+        flex-wrap: wrap;
+        h4 {
+            width: 80%;
+            text-align: center;
+        }
+        h4.exerciseName {
+            text-align: left;
+        }
+    }
+
+}
+
+@media (max-width: 400px) { 
+    //header 
 }

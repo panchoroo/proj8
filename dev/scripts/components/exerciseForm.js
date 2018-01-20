@@ -238,10 +238,10 @@ class ExerciseForm extends React.Component {
                 <div className={`flex modalButtons`}>
                     <button type='submit'>
                         <i className='fa fa-check-circle' aria-hidden='true'></i>
-                        <span className='buttonTextSpan'>Submit </span> 
+                        <span className=''>Submit </span> 
                     </button>
                     <button type='button' onClick={this.displayModal}>
-                        <i className='fa fa-times-circle' aria-hidden='true'></i><span className='buttonTextSpan'>Close</span>     
+                        <i className='fa fa-times-circle' aria-hidden='true'></i><span className=''>Close</span>     
                     </button>   
                 </div>
 
