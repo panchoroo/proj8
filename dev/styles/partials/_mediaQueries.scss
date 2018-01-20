@@ -1,0 +1,25 @@
+/* Media query styles */
+
+@media (max-width: 900px) { 
+    .exerciseItem {
+        width: 100%;
+    }
+    // make fa icons with hover text in after element?
+    span.buttonTextSpan {
+        background: lightcoral;
+        display: none;
+
+        &:hover, &:focus {
+            position: absolute;
+            display: block;
+        }
+    }
+}
+
+
+@media (max-width: 690px) { 
+    // add item modal
+    .modal {
+        width: 100%;
+    }
+}

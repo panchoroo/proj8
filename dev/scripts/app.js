@@ -130,9 +130,7 @@ class App extends React.Component {
       currentDescription: item.currentDescription,
       currentReps: item.currentReps
     }
-    console.log('date additem', date)
-    console.log('item additem', item.currentItem)
-    console.log(`/users/${this.state.user.uid}/${date}/`)
+    
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
     
     workoutApp.push(newItem);
@@ -158,14 +156,14 @@ class App extends React.Component {
         <header className='flex'>
           <h1>💪 Workout App</h1>
 
-          <button onClick={this.toggleAddFunction} className="addButton"> <i className="fa fa-plus-circle" aria-hidden="true"></i>add workout</button>
+          <button onClick={this.toggleAddFunction} className="addButton"> <i className="fa fa-plus-circle" aria-hidden="true"></i><span className='buttonTextSpan'>add workout</span></button>
 
           {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> : ''} 
           
           <div className="flex">
             {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
 
-            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle-o" aria-hidden="true"></i> Log out</a> : <a href='' onClick={this.login}>Log in</a>}
+            {this.state.loggedIn ? <a href='' onClick={this.logout}><i className="fa fa-times-circle-o" aria-hidden="true"></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
         
         </header>

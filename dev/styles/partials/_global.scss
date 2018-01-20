@@ -1,8 +1,9 @@
 /* Global styles */
 
-$darkColor: black;
-$lightColor: #fcc71b;
-$lightColor2: white;
+$darkColor: rgb(26, 25, 26);
+$lightColor: rgb(252, 199, 27);
+// $lightColor2: rgb(218, 216, 216);
+$lightColor2: rgb(244, 242, 237);
 
 $accentColor: rgba(153, 152, 153, 0.884);
 $accentColor2: rgba(26, 25, 26, 0.884);
@@ -35,7 +36,7 @@ button {
     border-radius: 10px;
     padding: 5px 10px;
     border: 2px solid $lightColor;
-    &:hover {
+    &:hover, &:focus {
         transition: .5s;
         color: $lightColor2;
         border-color: $lightColor2;
@@ -43,12 +44,16 @@ button {
 }
 
 button>i.fa {
-    margin-right: 5px;
+    // margin-right: 5px;
+}
+
+span.buttonTextSpan {
+    margin-left: 5px;
 }
 
 a {
     color: $lightColor;
-    &:hover {
+    &:hover, &:focus {
         transition: .5s;
         color: $lightColor2;
         border-color: $lightColor2;

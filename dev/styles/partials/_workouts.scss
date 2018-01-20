@@ -33,7 +33,7 @@
             text-transform: uppercase;
         }
     }
-    & span {
+    & span.repsSpan {
         font-family: $otherFont;
         font-weight: 700;
         text-align: right;
@@ -45,6 +45,10 @@
         border: 2px solid $accentColor2;
     }
 }
+
+// span.buttonTextSpan {
+
+// }
 
 .allWorkouts h2 {
     margin: 0;
