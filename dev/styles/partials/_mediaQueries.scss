@@ -24,6 +24,15 @@
     button.addButton, .modalButtons>button {
         border-radius: 10px;
     }
+    
+    button.addButton {
+        right: calc(50% - 28px);
+    }
+
+    .backToTop {
+        padding: 6px 4px 8px 0px;
+        right: calc(50% - 20px);
+    }
 }
 
 
@@ -43,9 +52,9 @@
 
 @media (max-width: 610px) { 
 
-    button.addButton {
-        margin-left: 21%;
-    }
+    // button.addButton {
+    //     // margin-left: 21%;
+    // }
     header {
         flex-wrap: wrap;
     }
@@ -76,7 +85,7 @@
         flex-direction: column;
     }
     button.addButton {
-        margin-left: 20px;
+        // margin-left: 20px;
     }
 }
 
