@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
+import $ from 'jquery';
 
 import ExerciseForm from './components/exerciseForm';
 import WorkoutItem from './components/workoutItem';
@@ -12,7 +13,7 @@ var config = {
   authDomain: 'workout-app-4f669.firebaseapp.com',
   databaseURL: 'https://workout-app-4f669.firebaseio.com',
   projectId: 'workout-app-4f669',
-  storageBucket: '',
+  storageBucket: 'workout-app-4f669.appspot.com',
   messagingSenderId: '701827082182'
 };
 firebase.initializeApp(config);
