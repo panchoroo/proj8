@@ -27,6 +27,7 @@ class App extends React.Component {
       loggedIn: false,
       allWorkouts: [],
       allDates:[],
+      displayInstructions: true,
       toggleAdd: false,
       displayError: false,
       dateString: null,
@@ -39,6 +40,7 @@ class App extends React.Component {
     this.toggleAddFunction = this.toggleAddFunction.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.getDate = this.getDate.bind(this);
+    this.toggleInstructions = this.toggleInstructions.bind(this);
 
   }
 
@@ -93,6 +95,7 @@ class App extends React.Component {
         // console.log('all workouts', this.state.allWorkouts);
         this.setState({
           displayError: false,
+          displayInstructions: false
         })
       });
   }
@@ -104,6 +107,7 @@ class App extends React.Component {
         this.setState({
           user: null,
           loggedIn: false,
+          displayInstructions: true,
           allWorkouts: [],
           allDates: []
         })
@@ -156,6 +160,18 @@ class App extends React.Component {
     })
   }
 
+  toggleInstructions(e) {
+    e.preventDefault();
+    let displayInstructions = true;
+    if (this.state.displayInstructions) {
+      displayInstructions = false;
+    } 
+    this.setState({
+      displayInstructions
+    })
+  }
+  
+
   deleteItem(date, index) {
     firebase.database().ref(`/users/${this.state.user.uid}/${date}/${index}`).remove();
   }
@@ -188,11 +204,14 @@ class App extends React.Component {
 
         <a href='#header' className='backToTop'><i className='fa fa-arrow-up'> </i><span className='buttonTextSpan'>Back to Top</span></a>
 
-        {this.state.loggedIn ? 
-          ''
-          : <p>
-            This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise.  For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.
-        </p> }
+        <button onClick={this.toggleInstructions}>Instructions</button>
+        {this.state.displayInstructions ?  
+          <section className="instructions"><p>
+            This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise.  For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.</p>
+            <p>As you add workouts, they will be added to the database by today's date. When add a workout on a subsequent day, the app will automatically recall which type of exercise you did last time (e.g. pistol squats or diamond pushups)</p>
+          </section>
+          : ''
+        }
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
