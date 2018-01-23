@@ -60,7 +60,11 @@ class ExerciseForm extends React.Component {
                 counter += 1;
             }
         }
-        lastReps[counter - 1] = lastReps[counter - 1].substr(0, lastReps[counter - 1].length - 2) + ')';
+
+        if (counter > 0) {
+            console.log('last workout exists')
+            lastReps[counter - 1] = lastReps[counter - 1].substr(0, lastReps[counter - 1].length - 2) + ')';
+        }
 
         this.setState({
             lastDescription,

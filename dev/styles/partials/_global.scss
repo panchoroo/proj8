@@ -35,6 +35,12 @@ header, footer, button {
     color: $lightColor;
 }
 
+p {
+    color: darken($lightColor2, 10);
+    padding: 10%;
+    line-height: 1.5;
+}
+
 button, .backToTop {
     text-transform: uppercase;
     text-decoration: none;

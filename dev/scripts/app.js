@@ -29,6 +29,7 @@ class App extends React.Component {
       allWorkouts: [],
       allDates:[],
       toggleAdd: false,
+      displayError: false,
       dateString: null,
       dateFooter: '',
       lastWorkout: []
@@ -91,6 +92,9 @@ class App extends React.Component {
     firebase.auth().signInWithPopup(provider)
       .then((user) => {
         // console.log('all workouts', this.state.allWorkouts);
+        this.setState({
+          displayError: false,
+        })
       });
   }
 
@@ -139,11 +143,17 @@ class App extends React.Component {
 
   toggleAddFunction() {
     let toggleAdd = true;
+    let displayError = false;
+
     if (this.state.toggleAdd) {
       toggleAdd = false;
+    } else if (!this.state.loggedIn) {
+      toggleAdd = false;
+      displayError = true;
     }
     this.setState({
-      toggleAdd
+      toggleAdd,
+      displayError
     })
   }
 
@@ -159,10 +169,18 @@ class App extends React.Component {
 
           <button onClick={this.toggleAddFunction} className='addButton'> <i className='fa fa-plus-circle' aria-hidden='true'></i><span className='buttonTextSpan'>add workout</span></button>
 
-          {this.state.toggleAdd ? <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> : ''} 
+          {/* && this.state.user */}
+          {this.state.toggleAdd ?
+            <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> 
+            : ''}
+
+          {this.state.displayError ? 
+            <h5>Please Log In to add a workout</h5>
+            : ''
+          }
           
           <div className='flex'>
-            {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: ''}
+            {this.state.user ? <h3>{`Welcome, ${this.state.user.displayName.split(' ')[0]}!  `}</h3>: <h3>Please Log In to begin</h3>}
 
             {this.state.loggedIn ? <a href='' onClick={this.logout}><i className='fa fa-times' aria-hidden='true'></i><span className='buttonTextSpan'>Log out </span></a> : <a href='' onClick={this.login}>Log in</a>}
           </div>
@@ -170,6 +188,12 @@ class App extends React.Component {
         </header>
 
         <a href='#header' className='backToTop'><i className='fa fa-arrow-up'> </i><span className='buttonTextSpan'>Back to Top</span></a>
+
+        {this.state.loggedIn ? 
+          <h3>Click to add a workout</h3> 
+          : <p>
+            This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise.  For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.
+        </p> }
 
         <section className='workouts'>
           <ul className='workoutsByDate'>
