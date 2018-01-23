@@ -50,31 +50,74 @@ class App extends React.Component {
       if (user) {
         const workoutApp = firebase.database().ref(`/users/${user.uid}`);
         
-        workoutApp.on('value', (snapshot) => {
-          const allWorkouts = [];
-          const allDates = [];
-          
-          let workoutInfo = snapshot.val();
+        const allWorkouts = [];
+        const allDates = [];
 
-          for (let date in workoutInfo) {            
+        workoutApp.on('value', (snapshot) => {
+        
+          let workoutInfo = snapshot.val();
+          if (workoutInfo) {
+        
+            for (let date in workoutInfo) {           
+              const workoutsOnDate = [];
+              const workouts = workoutInfo[date];
+              allDates.push(date);
+              for (let ex in workouts) {
+                let exercise = workouts[ex];
+                exercise['key'] = ex;
+                workoutsOnDate.push(exercise);
+              }
+              allWorkouts.push(workoutsOnDate);
+            } 
+
+            allWorkouts.reverse();
+            allDates.reverse();
+
+          } else {
+
+            allDates.push('Workout Example');
             const workoutsOnDate = [];
-            const workouts = workoutInfo[date];
-            allDates.push(date);
-            for (let ex in workouts) {
-              let exercise = workouts[ex];
-              exercise['key'] = ex;
+            
+            for (let i = 1; i < 13; i++) {
+
+              let currentItem = 'squats';
+              let currentDescription = 'pistol';
+              let currentReps = '4';
+
+              if (i <= 6 && i % 2 === 0) {
+                currentItem = 'l-sit';
+                currentDescription = 'foot-assisted';
+                currentReps = '3';
+              } else if (i > 6 && i % 2 === 0) {
+                currentItem = 'rows';
+                currentDescription = 'horizontal';
+                currentReps = '5';
+              } else if (i > 6) {
+                currentItem = 'pushups';
+                currentDescription = 'chair';
+                currentReps = '3';
+              }
+
+              const exercise = {
+                currentItem: currentItem,
+                currentDescription: currentDescription,
+                currentReps: currentReps
+              }
+              exercise['key'] = i;
               workoutsOnDate.push(exercise);
-            }
+            } 
             allWorkouts.push(workoutsOnDate);
+            console.log('allWorkouts in else', allWorkouts);
           }
-          allWorkouts.reverse();
-          allDates.reverse();
+
           let lastWorkout = [];
-          if (allDates[0] === this.state.dateString) {
+          if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
             lastWorkout = allWorkouts[1];
           } else {
             lastWorkout = allWorkouts[0];
           }
+
+          console.log('allWorkouts before set state',allWorkouts);
           
           this.setState({
             user,
@@ -83,6 +126,8 @@ class App extends React.Component {
             allDates,
             lastWorkout
           })
+
+          console.log('allWorkouts after set state', this.state.allWorkouts)
         });
       }
     });    
@@ -156,7 +201,8 @@ class App extends React.Component {
     }
     this.setState({
       toggleAdd,
-      displayError
+      displayError,
+      displayInstructions: false
     })
   }
 
@@ -171,7 +217,6 @@ class App extends React.Component {
     })
   }
   
-
   deleteItem(date, index) {
     firebase.database().ref(`/users/${this.state.user.uid}/${date}/${index}`).remove();
   }
@@ -184,7 +229,6 @@ class App extends React.Component {
 
           <button onClick={this.toggleAddFunction} className='addButton'> <i className='fa fa-plus-circle' aria-hidden='true'></i><span className='buttonTextSpan'>add workout</span></button>
 
-          {/* && this.state.user */}
           {this.state.toggleAdd ?
             <ExerciseForm submitForm={this.addItem} date={this.state.dateString} lastWorkout={this.state.lastWorkout} toggleAdd={ this.toggleAddFunction}/> 
             : ''}
@@ -207,8 +251,9 @@ class App extends React.Component {
         <button onClick={this.toggleInstructions}>Instructions</button>
         {this.state.displayInstructions ?  
           <section className="instructions"><p>
-            This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise.  For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.</p>
+            This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise. For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.</p>
             <p>As you add workouts, they will be added to the database by today's date. When add a workout on a subsequent day, the app will automatically recall which type of exercise you did last time (e.g. pistol squats or diamond pushups)</p>
+            <button onClick={this.toggleInstructions}>Got It</button>
           </section>
           : ''
         }
