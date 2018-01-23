@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import firebase from 'firebase';
-import $ from 'jquery';
 
 import ExerciseForm from './components/exerciseForm';
 import WorkoutItem from './components/workoutItem';
@@ -175,8 +174,8 @@ class App extends React.Component {
             : ''}
 
           {this.state.displayError ? 
-            <h5>Please Log In to add a workout</h5>
-            : ''
+            <h5>*Please Log In to add a workout</h5>
+            : <h6>*Click to add a workout</h6> 
           }
           
           <div className='flex'>
@@ -190,7 +189,7 @@ class App extends React.Component {
         <a href='#header' className='backToTop'><i className='fa fa-arrow-up'> </i><span className='buttonTextSpan'>Back to Top</span></a>
 
         {this.state.loggedIn ? 
-          <h3>Click to add a workout</h3> 
+          ''
           : <p>
             This workout app was created to track <a href='https://www.reddit.com/r/bodyweightfitness/'>Bodyweight Fitness</a> workouts. They alternate between Squats, L-sits, Pushups, and Rows in order to build muscle in a safe, balanced way. There is a progression in difficulty for each workout, where you work your way up to three sets of eight reps before moving on to the next exercise.  For example, you might start with wall pushups, then move to pushups on a table or other high surface, then on a chair, then an ottoman, then the floor.
         </p> }
