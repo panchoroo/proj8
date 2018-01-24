@@ -99,11 +99,16 @@ class App extends React.Component {
 
           } else {
 
-            let allWorkouts = [];
-            let allDates = [];
-            exampleData = true;
-            allDates.push('Workout Example');
-            const workoutsOnDate = [];
+            this.setState({
+              user,
+              loggedIn: true,
+            })
+
+            // let allWorkouts = [];
+            // let allDates = [];
+            // exampleData = true;
+            // allDates.push('Workout Example');
+            // const workoutsOnDate = [];
             
             for (let i = 1; i < 13; i++) {
 
@@ -125,32 +130,35 @@ class App extends React.Component {
                 currentReps = '3';
               }
 
-              const exercise = {
+              const exerciseExample = {
                 currentItem: currentItem,
                 currentDescription: currentDescription,
                 currentReps: currentReps
               }
-              exercise['key'] = i;
-              workoutsOnDate.push(exercise);
-            } 
-            allWorkouts.push(workoutsOnDate);
-            console.log('all workouts else', allWorkouts);
-            
-            let lastWorkout = [];
-            if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
-              lastWorkout = allWorkouts[1];
-            } else {
-              lastWorkout = allWorkouts[0];
-            }
 
-            this.setState({
-              user,
-              loggedIn: true,
-              allWorkouts,
-              allDates,
-              lastWorkout,
-              exampleData
-            })
+              const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/1-1-2018 Workout Example`);
+              workoutApp.push(exerciseExample);
+              // exercise['key'] = i;
+              // workoutsOnDate.push(exercise);
+            } 
+            // allWorkouts.push(workoutsOnDate);
+            // console.log('all workouts else', allWorkouts);
+            
+            // let lastWorkout = [];
+            // if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
+            //   lastWorkout = allWorkouts[1];
+            // } else {
+            //   lastWorkout = allWorkouts[0];
+            // }
+
+            // this.setState({
+            //   user,
+            //   loggedIn: true,
+            //   allWorkouts,
+            //   allDates,
+            //   lastWorkout,
+            //   exampleData
+            // })
           }
 
           
