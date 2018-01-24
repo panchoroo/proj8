@@ -2,7 +2,7 @@
 
 form.modal {
     padding: 0;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 
     label, h4 {
@@ -20,6 +20,11 @@ form.modal {
     section  {
         width: 615px;
         flex-wrap: wrap;
+    }
+    >h3 {
+        position: absolute;
+        top: 10vh;
+        left: 36%;
     }
 }
 
@@ -83,4 +88,9 @@ input[type='radio']:checked:after {
     visibility: visible;
     border: 2px solid $lightColor;
     border-radius: 15px;
+}
+
+.exerciseForm {
+    align-self: flex-start;
+    margin-top: 19%;
 }

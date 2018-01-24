@@ -27,10 +27,10 @@ class App extends React.Component {
       loggedIn: false,
       allWorkouts: [],
       allDates:[],
-      displayInstructions: true,
+      displayInstructions: false,
       toggleAdd: false,
       displayError: false,
-      exampleData: false,
+      // exampleData: false,
       dateString: null,
       dateFooter: '',
       lastWorkout: []
@@ -48,9 +48,6 @@ class App extends React.Component {
     this.getDate();
 
     firebase.auth().onAuthStateChanged((user) => {
-      // while (allWorkouts.length) { allWorkouts.pop(); }
-      // allWorkouts = [];
-      // console.log('all workouts b4 value', allWorkouts.length);
 
       if (user) {
         
@@ -62,7 +59,6 @@ class App extends React.Component {
           if (workoutInfo) {
             let allWorkouts = [];
             let allDates = [];
-            console.log('all workouts value', allWorkouts.length);
 
             for (let date in workoutInfo) {           
               const workoutsOnDate = [];
@@ -79,7 +75,6 @@ class App extends React.Component {
 
             allWorkouts.reverse();
             allDates.reverse();
-            console.log('all workouts if ', allWorkouts);
 
             let lastWorkout = [];
             if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
@@ -102,13 +97,8 @@ class App extends React.Component {
             this.setState({
               user,
               loggedIn: true,
+              displayInstructions: true
             })
-
-            // let allWorkouts = [];
-            // let allDates = [];
-            // exampleData = true;
-            // allDates.push('Workout Example');
-            // const workoutsOnDate = [];
             
             for (let i = 1; i < 13; i++) {
 
@@ -138,40 +128,9 @@ class App extends React.Component {
 
               const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/1-1-2018 Workout Example`);
               workoutApp.push(exerciseExample);
-              // exercise['key'] = i;
-              // workoutsOnDate.push(exercise);
+              
             } 
-            // allWorkouts.push(workoutsOnDate);
-            // console.log('all workouts else', allWorkouts);
-            
-            // let lastWorkout = [];
-            // if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
-            //   lastWorkout = allWorkouts[1];
-            // } else {
-            //   lastWorkout = allWorkouts[0];
-            // }
-
-            // this.setState({
-            //   user,
-            //   loggedIn: true,
-            //   allWorkouts,
-            //   allDates,
-            //   lastWorkout,
-            //   exampleData
-            // })
           }
-
-          
-          // console.log('all workouts before state', allWorkouts);
-
-          // this.setState({
-          //   user,
-          //   loggedIn: true,
-          //   allWorkouts,
-          //   allDates,
-          //   lastWorkout,
-          //   exampleData
-          // })
         });
       }
     });    
