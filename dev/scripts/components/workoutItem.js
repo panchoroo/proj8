@@ -3,7 +3,7 @@ import React from 'react';
 import ExerciseItem from './exerciseItem';
 
 const WorkoutItem = (props) => {
-    console.log('props workoutitem',props);
+    
     if (props) {
         const date = props.date;
         const item = props.item;

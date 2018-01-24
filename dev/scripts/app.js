@@ -30,6 +30,7 @@ class App extends React.Component {
       displayInstructions: true,
       toggleAdd: false,
       displayError: false,
+      exampleData: false,
       dateString: null,
       dateFooter: '',
       lastWorkout: []
@@ -41,23 +42,28 @@ class App extends React.Component {
     this.deleteItem = this.deleteItem.bind(this);
     this.getDate = this.getDate.bind(this);
     this.toggleInstructions = this.toggleInstructions.bind(this);
-
   }
 
   componentDidMount() {
     this.getDate();
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        const workoutApp = firebase.database().ref(`/users/${user.uid}`);
-        
-        const allWorkouts = [];
-        const allDates = [];
 
+    firebase.auth().onAuthStateChanged((user) => {
+      // while (allWorkouts.length) { allWorkouts.pop(); }
+      // allWorkouts = [];
+      // console.log('all workouts b4 value', allWorkouts.length);
+
+      if (user) {
+        
+        const workoutApp = firebase.database().ref(`/users/${user.uid}`);
         workoutApp.on('value', (snapshot) => {
-        
+          let exampleData = false;
           let workoutInfo = snapshot.val();
+          
           if (workoutInfo) {
-        
+            let allWorkouts = [];
+            let allDates = [];
+            console.log('all workouts value', allWorkouts.length);
+
             for (let date in workoutInfo) {           
               const workoutsOnDate = [];
               const workouts = workoutInfo[date];
@@ -67,14 +73,35 @@ class App extends React.Component {
                 exercise['key'] = ex;
                 workoutsOnDate.push(exercise);
               }
+
               allWorkouts.push(workoutsOnDate);
             } 
 
             allWorkouts.reverse();
             allDates.reverse();
+            console.log('all workouts if ', allWorkouts);
+
+            let lastWorkout = [];
+            if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
+              lastWorkout = allWorkouts[1];
+            } else {
+              lastWorkout = allWorkouts[0];
+            }
+
+            this.setState({
+              user,
+              loggedIn: true,
+              allWorkouts,
+              allDates,
+              lastWorkout,
+              exampleData
+            })
 
           } else {
 
+            let allWorkouts = [];
+            let allDates = [];
+            exampleData = true;
             allDates.push('Workout Example');
             const workoutsOnDate = [];
             
@@ -107,27 +134,36 @@ class App extends React.Component {
               workoutsOnDate.push(exercise);
             } 
             allWorkouts.push(workoutsOnDate);
-            console.log('allWorkouts in else', allWorkouts);
+            console.log('all workouts else', allWorkouts);
+            
+            let lastWorkout = [];
+            if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
+              lastWorkout = allWorkouts[1];
+            } else {
+              lastWorkout = allWorkouts[0];
+            }
+
+            this.setState({
+              user,
+              loggedIn: true,
+              allWorkouts,
+              allDates,
+              lastWorkout,
+              exampleData
+            })
           }
 
-          let lastWorkout = [];
-          if (allDates[0] === this.state.dateString && allWorkouts.length > 1) {
-            lastWorkout = allWorkouts[1];
-          } else {
-            lastWorkout = allWorkouts[0];
-          }
-
-          console.log('allWorkouts before set state',allWorkouts);
           
-          this.setState({
-            user,
-            loggedIn: true,
-            allWorkouts,
-            allDates,
-            lastWorkout
-          })
+          // console.log('all workouts before state', allWorkouts);
 
-          console.log('allWorkouts after set state', this.state.allWorkouts)
+          // this.setState({
+          //   user,
+          //   loggedIn: true,
+          //   allWorkouts,
+          //   allDates,
+          //   lastWorkout,
+          //   exampleData
+          // })
         });
       }
     });    
@@ -137,7 +173,6 @@ class App extends React.Component {
     e.preventDefault();
     firebase.auth().signInWithPopup(provider)
       .then((user) => {
-        // console.log('all workouts', this.state.allWorkouts);
         this.setState({
           displayError: false,
           displayInstructions: false
@@ -167,7 +202,6 @@ class App extends React.Component {
     dateString += (newDate.getMonth() + 1) + '-';
     dateString += newDate.getDate() + '-';
     dateString += newDate.getFullYear(); 
-
     dateFooter = newDate.getFullYear();
 
     this.setState({
@@ -178,6 +212,16 @@ class App extends React.Component {
 
   addItem(item) {
     let date = this.state.dateString;
+    
+    if (this.state.exampleData) {
+      let exampleData = false;
+      this.setState({
+        exampleData,
+        displayInstructions: false,
+        allWorkouts: []        
+      }) 
+    }
+
     const newItem = {
       currentItem: item.currentItem,
       currentDescription: item.currentDescription,
@@ -185,7 +229,6 @@ class App extends React.Component {
     }
 
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
-    
     workoutApp.push(newItem);
   }
 
