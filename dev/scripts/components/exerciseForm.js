@@ -6,14 +6,14 @@ class ExerciseForm extends React.Component {
         super();
         this.state = {
             displayModal: true,
+            displaySubmitMessage: false,
             currentItem: 'squats',
             currentDescription: 'pistol',
             currentReps: '3',
             lastDescription: '',
-            displaySubmitMessage: false,
             lastReps: [],
-            date: props.date,
             lastWorkout: props.lastWorkout,
+            date: props.date,
             lastEntered: 'pistol',
             squats: 'pistol',
             lsit: 'foot-assisted',
@@ -79,16 +79,13 @@ class ExerciseForm extends React.Component {
     }
 
     getLastEntered(e) {
-        console.log(this.state.currentItem)
+
         let lastItem = e.target.value;
         if (lastItem === 'l-sit') {
             lastItem = 'lsit';
-            console.log('lastItem', lastItem);
         } 
 
         const lastDescEntered = this.state[lastItem];
-        // console.log('lastDescEntered',lastDescEntered);
-        // console.log('lastEntered',this.state.lastEntered);
 
         this.setState({
             lastEntered: lastDescEntered,
@@ -116,9 +113,13 @@ class ExerciseForm extends React.Component {
         this.getLastEntered(e);
         this.props.submitForm(this.state);
         const lastDesc = this.state.currentDescription;
-        const lastItem = this.state.currentItem;
+        let lastItem = this.state.currentItem;
         const currentDescription = this.state.lastEntered
-        // console.log(this.state.currentItem)
+
+        if (lastItem === 'l-sit') {
+            lastItem = 'lsit';
+        }
+
         this.setState({
             currentDescription,
             displaySubmitMessage: true,
@@ -201,7 +202,6 @@ class ExerciseForm extends React.Component {
                                     id='currentDescription'
                                     type='text'
                                     placeholder={this.state.lastEntered}
-                                    // defaultValue={this.state.lastEntered}
                                     value={this.state.currentDescription}
                                     onChange={this.handleChange}
                                     required='required'

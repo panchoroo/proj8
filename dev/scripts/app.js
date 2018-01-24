@@ -25,15 +25,14 @@ class App extends React.Component {
     this.state = {
       user: null,
       loggedIn: false,
-      allWorkouts: [],
       allDates:[],
+      allWorkouts: [],
+      lastWorkout: [],
       displayInstructions: false,
-      toggleAdd: false,
       displayError: false,
-      // exampleData: false,
+      toggleAdd: false,
       dateString: null,
       dateFooter: '',
-      lastWorkout: []
     }
     this.login = this.login.bind(this);
     this.logout = this.logout.bind(this);
@@ -53,7 +52,7 @@ class App extends React.Component {
         
         const workoutApp = firebase.database().ref(`/users/${user.uid}`);
         workoutApp.on('value', (snapshot) => {
-          let exampleData = false;
+  
           let workoutInfo = snapshot.val();
           
           if (workoutInfo) {
@@ -88,8 +87,7 @@ class App extends React.Component {
               loggedIn: true,
               allWorkouts,
               allDates,
-              lastWorkout,
-              exampleData
+              lastWorkout
             })
 
           } else {
@@ -180,14 +178,9 @@ class App extends React.Component {
   addItem(item) {
     let date = this.state.dateString;
     
-    if (this.state.exampleData) {
-      let exampleData = false;
-      this.setState({
-        exampleData,
-        displayInstructions: false,
-        allWorkouts: []        
-      }) 
-    }
+    this.setState({
+      displayInstructions: false,
+    })
 
     const newItem = {
       currentItem: item.currentItem,
