@@ -133,7 +133,7 @@ class ExerciseForm extends React.Component {
             {this.state.displayModal ? 
                 <form action='submit' className={`modal flex`} onSubmit={this.handleSubmit}>
                     {this.state.displaySubmitMessage ? 
-                        <h3>Your exercise has been added!</h3>    
+                        <h3>*Your exercise has been added!</h3>    
                     : ''}
                     <section className={`exerciseForm flex`}>
                         <div className='exerciseInput'>
@@ -195,21 +195,6 @@ class ExerciseForm extends React.Component {
                                     <label htmlFor='other'>Other</label>
                                 </div>
                             </div>
-
-                            {/* <div className='textInputs'>
-                                <label htmlFor='currentDescription' className={`hidden primaryLabel`}>Enter a description</label>
-                                <input
-                                    id='currentDescription'
-                                    type='text'
-                                    placeholder={this.state.lastEntered}
-                                    value={this.state.currentDescription}
-                                    onChange={this.handleChange}
-                                    required='required'
-                                />
-                                {this.state.currentItem !== 'other' && this.state.lastDescription ? 
-                                    <h4>Last time you did {this.state.lastReps} of {this.state.lastDescription} {this.state.currentItem}</h4>
-                                : <h4>Enter your own exercise</h4>}
-                            </div> */}
                         </div>
                         {/* end exercise and description */}
 

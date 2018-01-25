@@ -2,7 +2,7 @@
 
 @media (max-width: 900px) { 
 
-    header h6 {
+    header h6, h5 {
         position: absolute; 
         top: 10px;
         left: 57%;
@@ -46,12 +46,16 @@
 
     .modal .exerciseForm {
         width: 100%;
-        padding: 50px;
+        padding: 100px 50px;
         margin: 0px;
 
         h4 {
             margin-bottom: 30px;
         }
+    }
+
+    form.modal > h3 {
+        top: 10px;
     }
     
     .textInputs {
@@ -60,7 +64,7 @@
 
 }
 
-@media (max-width: 610px) { 
+@media (max-width: 625px) { 
 
     header {
         flex-wrap: wrap;
@@ -78,11 +82,19 @@
         margin: 11px;
     }
 
+    footer {
+        flex-direction: column;
+        padding: 0 0 80px 0;
+
+        p {
+            margin: 10px;
+        }
+    }
 }
 
 @media (max-width: 470px) { 
 
-    .modal .exerciseItem {
+    .exerciseItem {
         flex-wrap: wrap;
         h4 {
             width: 80%;
@@ -93,8 +105,12 @@
         }
     }
 
-    .exerciseForm {
-        padding: 50px 25px;
+    form.modal > h3 {
+        left: 30px;
+    }
+
+    .modal .exerciseForm {
+        padding: 75px 25px;
     }
 
     .textInputs {
@@ -105,7 +121,7 @@
         flex-wrap: wrap;
 
         &>button {
-            margin: 0 50px 20px 0;
+            margin: 0 20px 20px 0;
         }
     }
 }
@@ -114,9 +130,6 @@
 
     .modalButtons {
         flex-direction: column;
-    }
-    button.addButton {
-        // margin-left: 20px;
     }
 
     form.modal label.primaryLabel{
