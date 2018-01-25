@@ -196,7 +196,7 @@ class ExerciseForm extends React.Component {
                                 </div>
                             </div>
 
-                            <div className='textInputs'>
+                            {/* <div className='textInputs'>
                                 <label htmlFor='currentDescription' className={`hidden primaryLabel`}>Enter a description</label>
                                 <input
                                     id='currentDescription'
@@ -209,12 +209,12 @@ class ExerciseForm extends React.Component {
                                 {this.state.currentItem !== 'other' && this.state.lastDescription ? 
                                     <h4>Last time you did {this.state.lastReps} of {this.state.lastDescription} {this.state.currentItem}</h4>
                                 : <h4>Enter your own exercise</h4>}
-                            </div>
+                            </div> */}
                         </div>
                         {/* end exercise and description */}
 
-                        <div className=''>
-                            <label className={`primaryLabel`}>Number of Reps:</label>
+                        <div className='repsSection'>
+                            <label className={`primaryLabel`}>Reps:</label>
                             <div className='repsInput'>
                             <div className='radioInput'>
                                 <input
@@ -278,6 +278,21 @@ class ExerciseForm extends React.Component {
                                 <label htmlFor='8'>8</label>
                             </div>
                         </div>  
+                    </div>
+
+                    <div className='textInputs'>
+                        <label htmlFor='currentDescription' className={`hidden primaryLabel`}>Progression Description:</label>
+                        <input
+                            id='currentDescription'
+                            type='text'
+                            placeholder={this.state.lastEntered}
+                            value={this.state.currentDescription}
+                            onChange={this.handleChange}
+                            required='required'
+                        />
+                        {this.state.currentItem !== 'other' && this.state.lastDescription ? 
+                            <h4>Last time you did {this.state.lastReps} of {this.state.lastDescription} {this.state.currentItem}</h4>
+                        : <h4>Enter your own exercise</h4>}
                     </div>
 
                 <div className={`flex modalButtons`}>

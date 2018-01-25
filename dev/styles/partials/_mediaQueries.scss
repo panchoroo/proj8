@@ -1,6 +1,12 @@
 /* Media query styles */
 
 @media (max-width: 900px) { 
+
+    header h6 {
+        position: absolute; 
+        top: 10px;
+        left: 57%;
+    }
     .exerciseItem {
         width: 100%;
     }
@@ -21,7 +27,7 @@
         margin-left: 5px;
     }
 
-    button.addButton, .modalButtons>button {
+    button.addButton, .modalButtons>button, .instructionsButtons {
         border-radius: 10px;
     }
     
@@ -39,30 +45,44 @@
 @media (max-width: 700px) { 
 
     .modal .exerciseForm {
-        flex-direction: column;
-        padding: 20px;
+        width: 100%;
+        padding: 50px;
+        margin: 0px;
 
         h4 {
             margin-bottom: 30px;
         }
     }
     
+    .textInputs {
+        margin-top: 50px;
+    }
 
 }
 
 @media (max-width: 610px) { 
 
-    // button.addButton {
-    //     // margin-left: 21%;
-    // }
     header {
         flex-wrap: wrap;
+
+        h6 {
+            left: 62%;
+        }
+
+        h1 {
+            margin-right: 60px;
+        }
     }
+
+    input#currentDescription {
+        margin: 11px;
+    }
+
 }
 
 @media (max-width: 470px) { 
 
-    .exerciseItem {
+    .modal .exerciseItem {
         flex-wrap: wrap;
         h4 {
             width: 80%;
@@ -73,10 +93,21 @@
         }
     }
 
-    input[type='text'] {
-        margin: 15px;
+    .exerciseForm {
+        padding: 50px 25px;
     }
-    
+
+    .textInputs {
+        margin-top: 20px;
+    }
+
+    .modalButtons{
+        flex-wrap: wrap;
+
+        &>button {
+            margin: 0 50px 20px 0;
+        }
+    }
 }
 
 @media (max-width: 400px) { 
@@ -86,6 +117,10 @@
     }
     button.addButton {
         // margin-left: 20px;
+    }
+
+    form.modal label.primaryLabel{
+        font-size: 1.19rem;
     }
 }
 
