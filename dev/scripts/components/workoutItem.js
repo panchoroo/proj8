@@ -18,7 +18,7 @@ const WorkoutItem = (props) => {
                     <h2>{date}</h2>
                     <ul className={`workout flex`}>
                         {workouts.map((eachEx, index) => {
-                            return <ExerciseItem item={eachEx.currentItem} desc={eachEx.currentDescription} reps={eachEx.currentReps} date={date} key={index} index={eachEx.key} delete= {props.delete}/>
+                            return <ExerciseItem item={eachEx.currentItem} desc={eachEx.currentDescription} reps={eachEx.currentReps} date={date} key={index} index={eachEx.key} style={eachEx} delete= {props.delete}/>
                         })}
 
                     </ul>

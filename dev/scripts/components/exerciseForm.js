@@ -21,13 +21,14 @@ class ExerciseForm extends React.Component {
             lsit: 'foot-assisted',
             rows: 'horizontal',
             pushups: 'chair',
-            other: 'compression'
+            other: ''
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.displayModal = this.displayModal.bind(this);
         this.getLast = this.getLast.bind(this);
         this.getLastEntered = this.getLastEntered.bind(this);
+        this.validateSubmission = this.validateSubmission.bind(this);
     }
 
     componentDidMount() {
@@ -119,24 +120,59 @@ class ExerciseForm extends React.Component {
         })
     }
 
+    validateSubmission(inputText) {
+        console.log('validating')
+        // return true or false 
+        // empty string?
+        
+            //check with regex
+        console.log(inputText, 'checking for valid string')
+        
+    }
+
+
     handleSubmit(e) {
         e.preventDefault();
-        this.getLastEntered(e);
-        this.props.submitForm(this.state);
-        const lastDesc = this.state.currentDescription;
-        let lastItem = this.state.currentItem;
-        const currentDescription = this.state.lastEntered
+        let validSubmit = false;
+        console.log(e.target['id=currentOther'])
 
-        if (lastItem === 'l-sit') {
-            lastItem = 'lsit';
+        if (this.state.currentItem === 'other' && this.state.currentReps === 'otherReps'){
+            //check both currentDescription & currentOther:
+            validSubmit = this.validateSubmission(this.state.currentDescription) && validateSubmission(this.state.currentOther);
+            console.log(validSubmit);
+
+        } else if (this.state.currentItem === 'other') {
+            // const desc = this.state.currentDescription;
+            // console.log(desc)
+            // validSubmit = this.validateSubmission(desc);
+            validSubmit = this.validateSubmission(this.state.currentDescription);
         }
-        
-        this.setState({
-            currentDescription,
-            currentOther: '',
-            displaySubmitMessage: true,
-            [lastItem]: lastDesc
-        })
+        else if (this.state.currentReps === 'otherReps') {
+            console.log(this.state.currentOther)
+            validSubmit = this.validateSubmission(this.state.currentOther);
+        } else {
+            validSubmit = true;
+        }
+
+        if (validSubmit) {
+
+            this.getLastEntered(e);
+            this.props.submitForm(this.state);
+            const lastDesc = this.state.currentDescription;
+            let lastItem = this.state.currentItem;
+            const currentDescription = this.state.lastEntered
+    
+            if (lastItem === 'l-sit') {
+                lastItem = 'lsit';
+            }
+            
+            this.setState({
+                currentDescription,
+                currentOther: '',
+                displaySubmitMessage: true,
+                [lastItem]: lastDesc
+            })
+        }
     }
 
     render() {

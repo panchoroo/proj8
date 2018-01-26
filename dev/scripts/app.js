@@ -107,7 +107,7 @@ class App extends React.Component {
               if (i <= 6 && i % 2 === 0) {
                 currentItem = 'l-sit';
                 currentDescription = 'foot-assisted';
-                currentReps = '3';
+                currentReps = '30sec';
               } else if (i > 6 && i % 2 === 0) {
                 currentItem = 'rows';
                 currentDescription = 'horizontal';
@@ -270,7 +270,7 @@ class App extends React.Component {
         <section className='workouts'>
           <ul className='workoutsByDate'>
             {this.state.allDates.map((eachDate, index) => {
-              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index} style={this.state.styleTag} delete= {this.deleteItem}/>
+              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index} delete= {this.deleteItem}/>
             })}
           </ul>
         </section>
