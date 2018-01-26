@@ -7,9 +7,11 @@ class ExerciseForm extends React.Component {
         this.state = {
             displayModal: true,
             displaySubmitMessage: false,
+            displayOtherReps: false,
             currentItem: 'squats',
             currentDescription: 'pistol',
             currentReps: '3',
+            currentOther: '',
             lastDescription: '',
             lastReps: [],
             lastWorkout: props.lastWorkout,
@@ -95,6 +97,8 @@ class ExerciseForm extends React.Component {
 
     handleChange(e) {
         let lastEntered = '';
+        // let displayOtherReps = false;
+
         if (e.target.name === 'exercise' && e.target.value !== 'other') {
             this.getLast(e);
             this.getLastEntered(e);
@@ -102,6 +106,13 @@ class ExerciseForm extends React.Component {
             this.getLastEntered(e);
         }
 
+        // if (e.target.value === 'otherReps') {
+        if (e.target.value === 'otherReps') {
+            this.setState({
+                displayOtherReps: true
+            })
+        }
+        // console.log( e.target.value, ' value')
         this.setState({
             [e.target.id]: e.target.value,
             displaySubmitMessage: false,
@@ -119,9 +130,10 @@ class ExerciseForm extends React.Component {
         if (lastItem === 'l-sit') {
             lastItem = 'lsit';
         }
-
+        
         this.setState({
             currentDescription,
+            currentOther: '',
             displaySubmitMessage: true,
             [lastItem]: lastDesc
         })
@@ -261,6 +273,15 @@ class ExerciseForm extends React.Component {
                                     onChange={this.handleChange}
                                 />
                                 <label htmlFor='8'>8</label>
+                            </div>
+                            <div className={`radioInput otherInput`}>
+                                <input type='radio' id='currentReps' name='reps' value='otherReps' onChange={this.handleChange}/> 
+                                <label htmlFor='other'>Other</label>
+                                {this.state.displayOtherReps ?
+                                    <div>
+                                        <input type='text' id='currentOther' value={this.state.currentOther} onChange={this.handleChange} />​​​​​​​​​​​​​​​​​​
+                                    </div>
+                                : ''}
                             </div>
                         </div>  
                     </div>

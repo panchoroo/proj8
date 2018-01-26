@@ -182,10 +182,16 @@ class App extends React.Component {
       displayInstructions: false,
     })
 
+    let reps = item.currentReps;
+    if (reps === 'otherReps') {
+      reps = item.currentOther;
+      // TODO: maybe something here about styling?
+    }
+
     const newItem = {
       currentItem: item.currentItem,
       currentDescription: item.currentDescription,
-      currentReps: item.currentReps
+      currentReps: reps
     }
 
     const workoutApp = firebase.database().ref(`/users/${this.state.user.uid}/${date}`);
@@ -264,7 +270,7 @@ class App extends React.Component {
         <section className='workouts'>
           <ul className='workoutsByDate'>
             {this.state.allDates.map((eachDate, index) => {
-              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index} delete= {this.deleteItem}/>
+              return <WorkoutItem item={this.state.allWorkouts} date={eachDate} key={eachDate} index={index} style={this.state.styleTag} delete= {this.deleteItem}/>
             })}
           </ul>
         </section>
