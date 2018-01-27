@@ -9,7 +9,6 @@ const ExerciseItem = (props) => {
         let styleTag = '';
 
         if (reps.length > 1) {
-            console.log(reps)
             styleTag = 'otherReps';
         } else if (reps.length < 1) {
             reps = '0';

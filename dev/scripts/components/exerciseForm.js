@@ -8,6 +8,7 @@ class ExerciseForm extends React.Component {
             displayModal: true,
             displaySubmitMessage: false,
             displayOtherReps: false,
+            displayErrorMessage: false,
             currentItem: 'squats',
             currentDescription: 'pistol',
             currentReps: '3',
@@ -115,12 +116,16 @@ class ExerciseForm extends React.Component {
         this.setState({
             [e.target.id]: e.target.value,
             displaySubmitMessage: false,
+            displayErrorMessage: false
         })
     }
 
     validateSubmission(inputText) {
         
         if (/[^A-Za-z0-9]/.test(inputText)) {
+            this.setState ({
+                displayErrorMessage: true
+            })
             return false
         }
         return true
@@ -129,25 +134,20 @@ class ExerciseForm extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         let validSubmit = false;
-        const otherReps = e.target.elements[12].value;
+        const textValue = e.target.elements[12].value;
+        const submission = e.target.elements;
 
-        if (this.state.currentItem === 'other' && this.state.currentReps === 'otherReps'){
-            validSubmit = this.validateSubmission(this.state.currentDescription) && this.validateSubmission(otherReps);
-            console.log('validSubmit', validSubmit);
+        if (submission.length === 15) {
+            validSubmit = this.validateSubmission(textValue);
             
-        } else if (this.state.currentItem === 'other') {
-            validSubmit = this.validateSubmission(this.state.currentDescription);
-        
-        } else if (this.state.currentReps === 'otherReps') {
-            console.log(this.state.currentOther)
-            validSubmit = this.validateSubmission(otherReps);
+        } else if (submission.length > 15) {
+            validSubmit = this.validateSubmission(textValue) && this.validateSubmission(submission[13].value);
         
         } else {
             validSubmit = true;
         }
 
         if (validSubmit) {
-            console.log('yes validsubmission')
             this.getLastEntered(e);
             this.props.submitForm(this.state);
             const lastDesc = this.state.currentDescription;
@@ -174,6 +174,9 @@ class ExerciseForm extends React.Component {
                 <form action='submit' className={`modal flex`} onSubmit={this.handleSubmit}>
                     {this.state.displaySubmitMessage ? 
                         <h3>*Your exercise has been added!</h3>    
+                    : ''}
+                    {this.state.displayErrorMessage ?
+                        <h3>*Only numbers and letters are allowed</h3>
                     : ''}
                     <section className={`exerciseForm flex`}>
                         <div className='exerciseInput'>
