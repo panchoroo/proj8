@@ -1,4 +1,25 @@
 /* Media query styles */
+@media (max-width: 1060px) { 
+    .exerciseItem {
+        flex-wrap: wrap;
+        h4 {
+            width: 80%;
+            text-align: center;
+        }
+        h4.exerciseName {
+            text-align: left;
+        }
+    }
+
+    span.buttonTextSpan {
+        display: none;
+
+        &:hover, &:focus {
+            position: absolute;
+            display: block;
+        }
+    }
+}
 
 @media (max-width: 900px) { 
 
@@ -9,6 +30,7 @@
     }
     .exerciseItem {
         width: 100%;
+        flex-wrap: nowrap;
     }
     
     span.buttonTextSpan {
@@ -80,6 +102,7 @@
 
     input#currentDescription {
         margin: 11px;
+        font-size: 1rem;
     }
 
     footer {
@@ -89,6 +112,10 @@
         p {
             margin: 10px;
         }
+    }
+
+    form.modal > h3 {
+        left: 30px;
     }
 }
 
@@ -103,10 +130,6 @@
         h4.exerciseName {
             text-align: left;
         }
-    }
-
-    form.modal > h3 {
-        left: 30px;
     }
 
     .modal .exerciseForm {
@@ -135,10 +158,58 @@
     form.modal label.primaryLabel{
         font-size: 1.19rem;
     }
+
+    input#currentOther {
+        position: absolute;
+        right: 44px;
+    }
+
+    header h1 {
+        margin-right: 20px;
+    }
 }
 
-@media (max-height: 800px) { 
+// @media (max-height: 800px) { 
+@media (max-height: 500px) { 
     .modal {
-        height: 800px;
+        // height: 800px;
+        height: 100vh;
+        padding: 10px;
+        .exerciseForm {
+            margin: 20px;
+            padding: 50px 0;
+            // flex-direction: row;
+            // > div {
+            //     width: 25%;
+            // }
+            .exerciseInput, .repsSection {
+                width: 20%;
+            }
+            .textInputs {
+                width: 60%;
+                margin-top: 0;
+            }
+
+            .modalButtons {
+                width: 50%;
+                // margin-top: 0px;
+                position: absolute;
+                right: 10px;
+                bottom: 10px;
+
+            }
+
+            input#currentDescription {
+                margin: 11px;
+                // font-size: 1rem;
+            }
+        }
     }
+
+
+    form.modal > h3 {
+        left: 10px;
+        top: 10px;
+    }
+
 }

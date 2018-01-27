@@ -176,7 +176,7 @@ class ExerciseForm extends React.Component {
                         <h3>*Your exercise has been added!</h3>    
                     : ''}
                     {this.state.displayErrorMessage ?
-                        <h3>*Only numbers and letters are allowed</h3>
+                        <h3>*Only numbers and letters please</h3>
                     : ''}
                     <section className={`exerciseForm flex`}>
                         <div className='exerciseInput'>
