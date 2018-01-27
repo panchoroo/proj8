@@ -12,7 +12,13 @@ $otherFont: 'Roboto', sans-serif;
 
 html {
     font-family: $otherFont;
-    background: $darkColor;
+    background: $darkColor;  
+    display: flex;
+    justify-content: center;
+}
+
+body {
+    max-width: 1200px;
 }
 
 h1, h2, h3, h4, h5, h6 {

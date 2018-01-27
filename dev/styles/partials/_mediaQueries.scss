@@ -169,19 +169,13 @@
     }
 }
 
-// @media (max-height: 800px) { 
 @media (max-height: 500px) { 
     .modal {
-        // height: 800px;
         height: 100vh;
         padding: 10px;
         .exerciseForm {
             margin: 20px;
             padding: 50px 0;
-            // flex-direction: row;
-            // > div {
-            //     width: 25%;
-            // }
             .exerciseInput, .repsSection {
                 width: 20%;
             }
@@ -192,7 +186,6 @@
 
             .modalButtons {
                 width: 50%;
-                // margin-top: 0px;
                 position: absolute;
                 right: 10px;
                 bottom: 10px;
@@ -201,7 +194,6 @@
 
             input#currentDescription {
                 margin: 11px;
-                // font-size: 1rem;
             }
         }
     }
