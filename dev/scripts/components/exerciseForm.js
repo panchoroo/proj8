@@ -119,15 +119,12 @@ class ExerciseForm extends React.Component {
     }
 
     validateSubmission(inputText) {
-        console.log('validating')
-        // return true or false 
-        // empty string?
         
-            //check with regex
-        console.log(inputText, 'checking for valid string')
+        if (/[^A-Za-z0-9]/.test(inputText)) {
+            return false
+        }
         return true
     }
-
 
     handleSubmit(e) {
         e.preventDefault();
@@ -135,17 +132,16 @@ class ExerciseForm extends React.Component {
         const otherReps = e.target.elements[12].value;
 
         if (this.state.currentItem === 'other' && this.state.currentReps === 'otherReps'){
-            //check both currentDescription & currentOther:
             validSubmit = this.validateSubmission(this.state.currentDescription) && this.validateSubmission(otherReps);
             console.log('validSubmit', validSubmit);
             
-
         } else if (this.state.currentItem === 'other') {
             validSubmit = this.validateSubmission(this.state.currentDescription);
-        }
-        else if (this.state.currentReps === 'otherReps') {
+        
+        } else if (this.state.currentReps === 'otherReps') {
             console.log(this.state.currentOther)
             validSubmit = this.validateSubmission(otherReps);
+        
         } else {
             validSubmit = true;
         }
@@ -311,7 +307,7 @@ class ExerciseForm extends React.Component {
                                 <label htmlFor='other'>Other</label>
                                 {this.state.displayOtherReps ?
                                     <div>
-                                        <input type='text' id='currentOther' value={this.state.currentOther} onChange={this.handleChange} />​​​​​​​​​​​​​​​​​​
+                                        <input type='text' id='currentOther' maxLength='6' value={this.state.currentOther} onChange={this.handleChange} />​​​​​​​​​​​​​​​​​​
                                     </div>
                                 : ''}
                             </div>
@@ -323,6 +319,7 @@ class ExerciseForm extends React.Component {
                         <input
                             id='currentDescription'
                             type='text'
+                            maxLength='16'
                             placeholder={this.state.lastEntered}
                             value={this.state.currentDescription}
                             onChange={this.handleChange}
