@@ -98,7 +98,6 @@ class ExerciseForm extends React.Component {
 
     handleChange(e) {
         let lastEntered = '';
-        // let displayOtherReps = false;
 
         if (e.target.name === 'exercise' && e.target.value !== 'other') {
             this.getLast(e);
@@ -107,13 +106,12 @@ class ExerciseForm extends React.Component {
             this.getLastEntered(e);
         }
 
-        // if (e.target.value === 'otherReps') {
         if (e.target.value === 'otherReps') {
             this.setState({
                 displayOtherReps: true
             })
         }
-        // console.log( e.target.value, ' value')
+
         this.setState({
             [e.target.id]: e.target.value,
             displaySubmitMessage: false,
@@ -127,35 +125,33 @@ class ExerciseForm extends React.Component {
         
             //check with regex
         console.log(inputText, 'checking for valid string')
-        
+        return true
     }
 
 
     handleSubmit(e) {
         e.preventDefault();
         let validSubmit = false;
-        console.log(e.target['id=currentOther'])
+        const otherReps = e.target.elements[12].value;
 
         if (this.state.currentItem === 'other' && this.state.currentReps === 'otherReps'){
             //check both currentDescription & currentOther:
-            validSubmit = this.validateSubmission(this.state.currentDescription) && validateSubmission(this.state.currentOther);
-            console.log(validSubmit);
+            validSubmit = this.validateSubmission(this.state.currentDescription) && this.validateSubmission(otherReps);
+            console.log('validSubmit', validSubmit);
+            
 
         } else if (this.state.currentItem === 'other') {
-            // const desc = this.state.currentDescription;
-            // console.log(desc)
-            // validSubmit = this.validateSubmission(desc);
             validSubmit = this.validateSubmission(this.state.currentDescription);
         }
         else if (this.state.currentReps === 'otherReps') {
             console.log(this.state.currentOther)
-            validSubmit = this.validateSubmission(this.state.currentOther);
+            validSubmit = this.validateSubmission(otherReps);
         } else {
             validSubmit = true;
         }
 
         if (validSubmit) {
-
+            console.log('yes validsubmission')
             this.getLastEntered(e);
             this.props.submitForm(this.state);
             const lastDesc = this.state.currentDescription;

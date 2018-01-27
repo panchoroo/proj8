@@ -8,7 +8,6 @@ const ExerciseItem = (props) => {
         let reps = props.reps;
         let styleTag = '';
 
-        // if (reps.length === 'l-sit') {
         if (reps.length > 1) {
             console.log(reps)
             styleTag = 'otherReps';
