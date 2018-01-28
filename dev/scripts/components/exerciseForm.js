@@ -122,7 +122,7 @@ class ExerciseForm extends React.Component {
 
     validateSubmission(inputText) {
         
-        if (/[^A-Za-z0-9]/.test(inputText)) {
+        if (/[^A-Za-z0-9\s-_]/.test(inputText)) {
             this.setState ({
                 displayErrorMessage: true
             })
@@ -176,7 +176,7 @@ class ExerciseForm extends React.Component {
                         <h3>*Your exercise has been added!</h3>    
                     : ''}
                     {this.state.displayErrorMessage ?
-                        <h3>*Only numbers and letters please</h3>
+                        <h3 className='errorMessage'>*Only numbers and letters please</h3>
                     : ''}
                     <section className={`exerciseForm flex`}>
                         <div className='exerciseInput'>

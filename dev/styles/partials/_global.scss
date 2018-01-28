@@ -18,6 +18,7 @@ html {
 }
 
 body {
+    width: 100%;
     max-width: 1200px;
 }
 
@@ -105,4 +106,8 @@ footer {
 .addButton {
     top: 20px;
     right: calc(50% - 85px);
+}
+
+.errorMessage {
+    color: rgb(244, 30, 30);
 }
